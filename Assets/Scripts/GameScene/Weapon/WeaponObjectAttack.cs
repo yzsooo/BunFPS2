@@ -41,7 +41,7 @@ public class WeaponObjectAttack : MonoBehaviour
     protected virtual bool WeaponCanFire()
     {
         if (_currentRoundsInMagazine > 0 &&
-            _firerateTimer <= 0.0f
+            _firerateTimer <= 0
             )
         {
             return true;
@@ -56,6 +56,8 @@ public class WeaponObjectAttack : MonoBehaviour
         // do raycast
         RaycastHit hit = _raycast.GetRaycastAttack(weapon.cam);
 
+        Debug.Log(hit.collider);
+
         // validate collision
         Entity entityOnHit = ReturnEntityOnCollider(hit.collider.GetComponent<EntityColliderInfo>());
 
@@ -63,6 +65,7 @@ public class WeaponObjectAttack : MonoBehaviour
         if (entityOnHit != null)
         {
             entityOnHit.HP.TakeDamage(weapon.weaponStats.damage);
+            Debug.Log("Damaged");
         }
         // expend ammo
         _currentRoundsInMagazine--;
@@ -73,7 +76,8 @@ public class WeaponObjectAttack : MonoBehaviour
         StartCoroutine(firerateTimer);
 
         // play visual and sound effects
-        _visualSoundEffects.PlayWeaponVisualSoundEffects(hit);
+        _visualSoundEffects.PlayWeaponAnimation(WeaponObjectAnimationManager.weaponAnimation.Fire);
+        _visualSoundEffects.CreateBulletHoleDecal(hit);
     }
 
     private Entity ReturnEntityOnCollider(EntityColliderInfo c)
@@ -88,13 +92,9 @@ public class WeaponObjectAttack : MonoBehaviour
 
     IEnumerator FirerateTimerCoroutine()
     {
-        // set _firerateTimer as this weapon's firerate and run down the timer until it reaches 0
-        // when _firerateTimer is 0, the weapon can be fired again
-        while (_firerateTimer > 0.0f)
-        {
-            _firerateTimer -= Time.deltaTime;
-            yield return new WaitForFixedUpdate();
-        }
+        // wait for _firerateTimer seconds and _firerateTimer as 0
+        // this used to work by subtracting deltatime from _firerateTimer until it reaches 0
+        yield return new WaitForSeconds(_firerateTimer);
         _firerateTimer = 0;
 
         yield return null;

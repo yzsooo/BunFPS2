@@ -147,6 +147,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponStats: {fileID: 11400000, guid: 335779be960c2b8479f3bb617dce4785, type: 2}
+  ViewmodelCamera: {fileID: 0}
+  weaponAnimation: {fileID: 0}
+  attack: {fileID: 0}
   cam: {fileID: 0}
   playerAttack: {fileID: 0}
 --- !u!114 &703756470794284546
@@ -179,6 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 0}
+  _firerateTimer: 0
 --- !u!114 &2872092996239969632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,9 +196,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 0}
-  MuzzlePosition: {fileID: 0}
-  hitParticle: {fileID: 0}
-  bulletHoleDecal: {fileID: 0}
+  MuzzlePosition: {fileID: 7154204523243045406}
+  MuzzleFlash: {fileID: 2305884103531119273, guid: c3692e176fd0f7e4a803a1f0b5ee2c4a, type: 3}
+  HitParticle: {fileID: 1304443224348521327, guid: c0e7efca1c9d6c14bb85d70bd323a162, type: 3}
+  BulletHoleDecal: {fileID: 3988345924838002282, guid: 0f44cc6c5b5e26145a43e1630b547142, type: 3}
+  _fireSound: {fileID: 8300000, guid: 45bc167699c721b43841a40d4e338515, type: 3}
 --- !u!114 &2534965690546802913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,6 +213,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69acd4e1eff6f4049a0a8e02b4a4129d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &7100939005037714202
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7154204523243045406}
+  m_Layer: 0
+  m_Name: Muzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7154204523243045406
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7100939005037714202}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.828331, y: 0.5572618, z: -0.028032621, w: 0.0504115}
+  m_LocalPosition: {x: 0.0026343227, y: -0.0035315289, z: -0.02267419}
+  m_LocalScale: {x: 0.0100000035, y: 0.009999981, z: 0.0099999895}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3219545173956157142}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8666352075962328968
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,7 +397,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: bc8b2f98eee30c941bef9d4cbd4c460c, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 7154204523243045406}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bc8b2f98eee30c941bef9d4cbd4c460c, type: 3}
       insertIndex: -1

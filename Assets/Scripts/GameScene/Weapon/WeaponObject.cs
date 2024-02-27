@@ -7,10 +7,11 @@ public class WeaponObject : MonoBehaviour
 {
     
     public WeaponScriptableObject weaponStats;
+    public Camera ViewmodelCamera;
 
     // scripts in weaponObject
-    WeaponObjectAnimationManager _animation;
-    WeaponObjectAttack _attack;
+    public WeaponObjectAnimationManager weaponAnimation;
+    public WeaponObjectAttack attack;
 
     // scripts from Player
     public Camera cam;
@@ -24,23 +25,24 @@ public class WeaponObject : MonoBehaviour
     void AssignWeaponObjectComponents()
     {
         // assign variables
-        _animation = GetComponent<WeaponObjectAnimationManager>();
-        _attack = GetComponent<WeaponObjectAttack>();
+        weaponAnimation = GetComponent<WeaponObjectAnimationManager>();
+        attack = GetComponent<WeaponObjectAttack>();
+        ViewmodelCamera = GetComponent<Camera>();
 
         // assign self to each script variables
-        _animation.weapon = this;
-        _attack.weapon = this;
+        weaponAnimation.weapon = this;
+        attack.weapon = this;
     }
 
     public bool StartAttack1()
     {
-        bool attackIsValid = _attack.StartAttack1();
+        bool attackIsValid = attack.StartAttack1();
         return attackIsValid;
     }
 
     public void StopAttack1()
     {
-        _attack.StopAttack1();
+        attack.StopAttack1();
     }
 
 }
