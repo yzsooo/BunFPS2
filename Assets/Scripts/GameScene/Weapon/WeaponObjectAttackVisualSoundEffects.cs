@@ -13,31 +13,28 @@ public class WeaponObjectAttackVisualSoundEffects : MonoBehaviour
 
     [Header("Sounds")]
     [SerializeField]
-    AudioClip _fireSound;
-    AudioClip _reloadSound;
-
-    //public void PlayWeaponVisualSoundEffects(RaycastHit hit)
-    //{
-    //    // play animation
-
-    //    // play muzzle flash particle effect
-
-    //    // play bullet hit particle
-
-    //    // play sounds
-        
-    //    // show hitmarker on HUD
-    //}
+    AudioClip _fireSound , _reloadSound;
 
     public void PlayWeaponAnimation(WeaponObjectAnimationManager.weaponAnimation animationToPlay)
     {
+        Debug.Log(animationToPlay);
         switch (animationToPlay)
         {
             case WeaponObjectAnimationManager.weaponAnimation.Fire:
-            {
-                PlayFireAnimation();
-                break;
-            }
+                {
+                    PlayFireAnimation();
+                    break;
+                }
+            case WeaponObjectAnimationManager.weaponAnimation.ReloadIn:
+                {
+                    PlayReloadIn();
+                    break;
+                }
+            case WeaponObjectAnimationManager.weaponAnimation.ReloadOut:
+                {
+                    PlayReloadOut();
+                    break;
+                }
         }
     }
 
@@ -59,5 +56,16 @@ public class WeaponObjectAttackVisualSoundEffects : MonoBehaviour
         // spawn bullet decal that decays overtime
         GameObject bulletholeDecal = Instantiate(BulletHoleDecal, hit.point + (hit.normal * 0.01f), Quaternion.FromToRotation(Vector3.back, hit.normal));
         Destroy(bulletholeDecal, 10f);
+    }
+
+    void PlayReloadIn()
+    {
+        weapon.weaponAnimation.PlayerWeaponAnimation(WeaponObjectAnimationManager.weaponAnimation.ReloadIn);
+    }
+
+    void PlayReloadOut()
+    {
+        weapon.weaponAnimation.PlayerWeaponAnimation(WeaponObjectAnimationManager.weaponAnimation.ReloadOut);
+        SoundPlayer.SoundPlayerInstance.PlaySound(_reloadSound, transform.position, 1.0f);
     }
 }

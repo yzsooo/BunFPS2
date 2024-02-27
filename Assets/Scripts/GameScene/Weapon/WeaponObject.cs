@@ -12,6 +12,7 @@ public class WeaponObject : MonoBehaviour
     // scripts in weaponObject
     public WeaponObjectAnimationManager weaponAnimation;
     public WeaponObjectAttack attack;
+    public WeaponObjectViewmodelSwayer ViewmodelSwayer;
 
     // scripts from Player
     public Camera cam;
@@ -28,6 +29,7 @@ public class WeaponObject : MonoBehaviour
         weaponAnimation = GetComponent<WeaponObjectAnimationManager>();
         attack = GetComponent<WeaponObjectAttack>();
         ViewmodelCamera = GetComponent<Camera>();
+        ViewmodelSwayer = GetComponent<WeaponObjectViewmodelSwayer>();
 
         // assign self to each script variables
         weaponAnimation.weapon = this;
@@ -45,4 +47,8 @@ public class WeaponObject : MonoBehaviour
         attack.StopAttack1();
     }
 
+    public void Reload()
+    {
+        attack.Reload();
+    }
 }

@@ -16,6 +16,12 @@ public class WeaponObjectAttack : MonoBehaviour
     float _firerateTimer = 0f;
     int _currentRoundsInMagazine;
 
+    // weapon state
+    enum WeaponState { Idle, Firing, Reload };
+    [SerializeField]
+    WeaponState _currentWeaponState = WeaponState.Idle;
+
+
     private void Awake()
     {
         _raycast = GetComponent<WeaponRaycast>();
@@ -41,7 +47,8 @@ public class WeaponObjectAttack : MonoBehaviour
     protected virtual bool WeaponCanFire()
     {
         if (_currentRoundsInMagazine > 0 &&
-            _firerateTimer <= 0
+            _firerateTimer <= 0 &&
+            _currentWeaponState == WeaponState.Idle
             )
         {
             return true;
@@ -52,7 +59,7 @@ public class WeaponObjectAttack : MonoBehaviour
 
     protected void AttackWithRaycast()
     {
-        Debug.Log("Bang");
+        _currentWeaponState = WeaponState.Firing;
         // do raycast
         RaycastHit hit = _raycast.GetRaycastAttack(weapon.cam);
 
@@ -96,12 +103,53 @@ public class WeaponObjectAttack : MonoBehaviour
         // this used to work by subtracting deltatime from _firerateTimer until it reaches 0
         yield return new WaitForSeconds(_firerateTimer);
         _firerateTimer = 0;
-
+        _currentWeaponState = WeaponState.Idle;
         yield return null;
     }
 
     public virtual void StopAttack1()
     {
         _bIsFiring = false;
+    }
+
+    public void Reload()
+    {
+        // Reload only if magazine is not full and can be reloaded
+        if (_currentRoundsInMagazine < weapon.weaponStats.roundsPerMagazine &&
+            _currentWeaponState != WeaponState.Reload)
+        {
+            // Reload using Coroutine
+            IEnumerator reloadCoroutine = ReloadCoroutine();
+            StartCoroutine(reloadCoroutine);
+        }
+    }
+
+    IEnumerator ReloadCoroutine()
+    {
+        StartReload();
+        float t = 0;
+        while (t <= weapon.weaponStats.reloadTime)
+        {
+            t += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        EndReload();
+        yield return null;
+    }
+
+    void StartReload()
+    {
+        _currentWeaponState = WeaponState.Reload;
+        // play animation
+        _visualSoundEffects.PlayWeaponAnimation(WeaponObjectAnimationManager.weaponAnimation.ReloadIn);
+    }
+
+    void EndReload()
+    {
+        // Refill ammo
+        _currentRoundsInMagazine = weapon.weaponStats.roundsPerMagazine;
+        // play animation and change state back to idle
+        _visualSoundEffects.PlayWeaponAnimation(WeaponObjectAnimationManager.weaponAnimation.ReloadOut);
+        _currentWeaponState = WeaponState.Idle;
     }
 }

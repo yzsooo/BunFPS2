@@ -44,6 +44,7 @@ public class PlayerInputManager : MonoBehaviour
         // attack actions
         _attackActions.Attack1.started += ctx => _pm.attack.InputStartAttack1();
         _attackActions.Attack1.canceled += ctx => _pm.attack.InputStopAttack1();
+        _attackActions.Reload.performed += ctx => _pm.attack.InputReload();
 
     }
 
@@ -56,9 +57,11 @@ public class PlayerInputManager : MonoBehaviour
     {
         // move actions
         _pm.movement.InputMovementVector(_moveActions.Move.ReadValue<Vector2>());
+        _pm.attack.InputMovementVector(_moveActions.Move.ReadValue<Vector2>());
 
         // look actions
         _pm.look.InputMouseLook(_lookActions.Look.ReadValue<Vector2>());
+        _pm.attack.InputMouseVector(_lookActions.Look.ReadValue<Vector2>());
     }
 
     private void OnEnable()

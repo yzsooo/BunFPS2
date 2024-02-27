@@ -80,4 +80,21 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    public void InputReload()
+    {
+        if (!currentWeapon) { return; }
+        currentWeapon.Reload();
+    }
+
+    public void InputMouseVector(Vector2 input)
+    {
+        if (!currentWeapon) { return; }
+        currentWeapon.ViewmodelSwayer.UpdateMouseVector(input);
+    }
+
+    public void InputMovementVector(Vector2 input)
+    {
+        if (!currentWeapon) { return; }
+        currentWeapon.ViewmodelSwayer.UpdateMovementVector(input);
+    }
 }
