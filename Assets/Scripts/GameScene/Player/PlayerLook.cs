@@ -7,7 +7,8 @@ public class PlayerLook : MonoBehaviour
 {
     // Components
     public PlayerManager pm;
-    private Camera cam;
+    Camera cam;
+    public PlayerCameraRecoil CameraRecoil;
 
     // Sensitivity
     public float sensitivity = 1.0f;
@@ -28,6 +29,7 @@ public class PlayerLook : MonoBehaviour
     private void Awake()
     {
         cam = GetComponent<Camera>();
+        CameraRecoil = GetComponent<PlayerCameraRecoil>();
     }
 
     public void InputMouseLook(Vector2 input)
@@ -40,6 +42,7 @@ public class PlayerLook : MonoBehaviour
         if (!pm.MouseLock) { return; }
         CalculateRotationVector();
         CalculateActualRotation();
+        CalculateRecoil();
         ApplyCameraRotation();
     }
 
@@ -55,6 +58,12 @@ public class PlayerLook : MonoBehaviour
     private void CalculateActualRotation()
     {
         _actualRotation = Vector3.Lerp(_intendedRotation, _intendedRotation + _compositeRotation, _compositeRotationInterpolate);
+    }
+
+    void CalculateRecoil()
+    {
+        // Add recoil to camera by adding the recoil vector into the intended camera look by lerp
+        _actualRotation = Vector3.Lerp(_intendedRotation, _intendedRotation + CameraRecoil.CompositeVector, CameraRecoil.RecoilInterpolate);
     }
 
     private void ApplyCameraRotation()

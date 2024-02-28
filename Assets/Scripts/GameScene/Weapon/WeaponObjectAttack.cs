@@ -116,7 +116,7 @@ public class WeaponObjectAttack : MonoBehaviour
     {
         // Reload only if magazine is not full and can be reloaded
         if (_currentRoundsInMagazine < weapon.weaponStats.roundsPerMagazine &&
-            _currentWeaponState != WeaponState.Reload)
+            _currentWeaponState == WeaponState.Idle)
         {
             // Reload using Coroutine
             IEnumerator reloadCoroutine = ReloadCoroutine();

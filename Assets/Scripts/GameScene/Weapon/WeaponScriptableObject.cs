@@ -12,4 +12,13 @@ public class WeaponScriptableObject : ScriptableObject
     public float roundsPerMinute;
     public float damage;
     public float reloadTime;
+
+    [Header("Recoil")]
+    public float RecoilAnglePerShot;
+    public float RecoilMaxAngle;
+    public float RecoilTimePerShot;
+
+    [Header("Sounds")]
+    public AudioClip FireSound;
+    public AudioClip ReloadSound;
 }
