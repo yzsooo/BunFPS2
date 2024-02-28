@@ -9,12 +9,12 @@ public class WeaponObject : MonoBehaviour
     public WeaponScriptableObject weaponStats;
     public Camera ViewmodelCamera;
 
-    // scripts in weaponObject
+    [Header("WeaponObject Scripts")]
     public WeaponObjectAnimationManager weaponAnimation;
     public WeaponObjectAttack attack;
     public WeaponObjectViewmodelSwayer ViewmodelSwayer;
 
-    // scripts from Player
+    [Header("Scripts from Player")]
     public Camera cam;
     public PlayerAttack playerAttack;
 

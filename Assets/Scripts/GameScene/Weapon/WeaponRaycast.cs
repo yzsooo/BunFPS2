@@ -5,10 +5,15 @@ using UnityEngine.Experimental.Rendering;
 
 public class WeaponRaycast : MonoBehaviour
 {
+    WeaponRaycastSpread _raycastSpread;
 
-    private WeaponScriptableObject _weaponStats;
     private Vector3 _cameraPosition;
     private Vector3 _cameraForward;
+
+    private void Awake()
+    {
+        _raycastSpread = GetComponent<WeaponRaycastSpread>();
+    }
 
     // Shoot a raycast using the camera's current position and dircetion
     public RaycastHit GetRaycastAttack(Camera cam)
@@ -43,10 +48,9 @@ public class WeaponRaycast : MonoBehaviour
     private Vector3 GetRaycastDirection()
     {
         Vector3 raycastDircetion = _cameraForward;
-
+        // apply spread here
+        raycastDircetion += _raycastSpread.GetSpreadVector();
         return raycastDircetion;
     }
-
-
 
 }

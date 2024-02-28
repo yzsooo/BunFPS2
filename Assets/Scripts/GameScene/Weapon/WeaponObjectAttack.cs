@@ -8,10 +8,15 @@ public class WeaponObjectAttack : MonoBehaviour
 
     // external script components
     WeaponRaycast _raycast;
+    WeaponRaycastSpread _raycastSpread;
     WeaponObjectAttackVisualSoundEffects _visualSoundEffects;
 
     // fire control
     bool _bIsFiring = false;
+    public bool bIsFiring
+    {
+        get { return _bIsFiring; }
+    }
     [SerializeField]
     float _firerateTimer = 0f;
     int _currentRoundsInMagazine;
@@ -25,6 +30,9 @@ public class WeaponObjectAttack : MonoBehaviour
     private void Awake()
     {
         _raycast = GetComponent<WeaponRaycast>();
+
+        _raycastSpread = GetComponent<WeaponRaycastSpread>();
+        _raycastSpread.weapon = this.weapon;
 
         _currentRoundsInMagazine = weapon.weaponStats.roundsPerMagazine;
 

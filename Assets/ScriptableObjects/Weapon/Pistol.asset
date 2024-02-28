@@ -17,8 +17,11 @@ MonoBehaviour:
   roundsPerMinute: 450
   damage: 10
   reloadTime: 1
-  RecoilAnglePerShot: 0.1
-  RecoilMaxAngle: 3
+  RecoilAnglePerShot: 40
+  RecoilMaxAngle: 20
   RecoilTimePerShot: 0.1
+  SpreadMaxAngle: 0.04
+  SpreadShotsToMaxAngle: 10
+  SpreadRecoverTime: 1
   FireSound: {fileID: 8300000, guid: 45bc167699c721b43841a40d4e338515, type: 3}
   ReloadSound: {fileID: 8300000, guid: 161ebce85baf70b42bb7ea212befbe57, type: 3}

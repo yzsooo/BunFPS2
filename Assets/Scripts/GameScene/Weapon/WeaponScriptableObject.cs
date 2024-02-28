@@ -18,6 +18,19 @@ public class WeaponScriptableObject : ScriptableObject
     public float RecoilMaxAngle;
     public float RecoilTimePerShot;
 
+    [Header("Spread")]
+    public float SpreadMaxAngle;
+    public int SpreadShotsToMaxAngle;
+    public float SpreadRecoverTime; 
+    public float GetSpreadInterpolatePerShot()
+    {
+        return SpreadRecoverTime / SpreadShotsToMaxAngle;
+    }
+    public float GetSpreadAnglePerShot()
+    {
+        return SpreadMaxAngle / SpreadShotsToMaxAngle;
+    }
+
     [Header("Sounds")]
     public AudioClip FireSound;
     public AudioClip ReloadSound;
