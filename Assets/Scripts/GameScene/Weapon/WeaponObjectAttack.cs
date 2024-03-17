@@ -40,6 +40,17 @@ public class WeaponObjectAttack : MonoBehaviour
         _visualSoundEffects.weapon = this.weapon;
     }
 
+    public void FixedUpdate()
+    {
+        ProcessHUDWeaponStats();
+    }
+
+    void ProcessHUDWeaponStats()
+    {
+        weapon.playerAttack.pm.HUD.HUDWeaponStats.MaxAmmo = weapon.weaponStats.roundsPerMagazine;
+        weapon.playerAttack.pm.HUD.HUDWeaponStats.AmmoCount = _currentRoundsInMagazine;
+    }
+
     public bool StartAttack1()
     {
         _bIsFiring = true;
