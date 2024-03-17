@@ -20,7 +20,7 @@ MonoBehaviour:
   RecoilAnglePerShot: 40
   RecoilMaxAngle: 20
   RecoilTimePerShot: 0.1
-  SpreadMaxAngle: 0.04
+  SpreadMaxAngle: 0.58
   SpreadShotsToMaxAngle: 10
   SpreadRecoverTime: 1
   FireSound: {fileID: 8300000, guid: 45bc167699c721b43841a40d4e338515, type: 3}

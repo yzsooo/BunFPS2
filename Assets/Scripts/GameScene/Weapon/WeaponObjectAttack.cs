@@ -7,8 +7,8 @@ public class WeaponObjectAttack : MonoBehaviour
     public WeaponObject weapon;
 
     // external script components
-    WeaponRaycast _raycast;
-    WeaponRaycastSpread _raycastSpread;
+    public WeaponRaycast Raycast;
+    public WeaponRaycastSpread RaycastSpread;
     WeaponObjectAttackVisualSoundEffects _visualSoundEffects;
 
     // fire control
@@ -29,10 +29,10 @@ public class WeaponObjectAttack : MonoBehaviour
 
     private void Awake()
     {
-        _raycast = GetComponent<WeaponRaycast>();
+        Raycast = GetComponent<WeaponRaycast>();
 
-        _raycastSpread = GetComponent<WeaponRaycastSpread>();
-        _raycastSpread.weapon = this.weapon;
+        RaycastSpread = GetComponent<WeaponRaycastSpread>();
+        RaycastSpread.weapon = this.weapon;
 
         _currentRoundsInMagazine = weapon.weaponStats.roundsPerMagazine;
 
@@ -69,7 +69,7 @@ public class WeaponObjectAttack : MonoBehaviour
     {
         _currentWeaponState = WeaponState.Firing;
         // do raycast
-        RaycastHit hit = _raycast.GetRaycastAttack(weapon.cam);
+        RaycastHit hit = Raycast.GetRaycastAttack(weapon.cam);
 
         Debug.Log(hit.collider);
 

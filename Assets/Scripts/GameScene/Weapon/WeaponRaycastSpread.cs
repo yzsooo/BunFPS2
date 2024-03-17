@@ -11,7 +11,7 @@ public class WeaponRaycastSpread : MonoBehaviour
     [SerializeField]
     int _spreadRampup;
     [SerializeField]
-    float _spreadInterpolate;
+    public float SpreadInterpolate;
 
     private void Update()
     {
@@ -23,10 +23,10 @@ public class WeaponRaycastSpread : MonoBehaviour
         // dont reduce spread if weapon is used
         if (weapon.attack.bIsFiring) { return; }
         // reduce spread interpolate overtime
-        _spreadInterpolate -= Time.deltaTime;
-        _spreadInterpolate = Mathf.Clamp(_spreadInterpolate, 0, _spreadInterpolate);
+        SpreadInterpolate -= Time.deltaTime;
+        SpreadInterpolate = Mathf.Clamp(SpreadInterpolate, 0, SpreadInterpolate);
         // reduce spread rampup alongside interpolate
-        _spreadRampup = Convert.ToInt32(Mathf.Lerp(0, weapon.weaponStats.SpreadShotsToMaxAngle, _spreadInterpolate));
+        _spreadRampup = Convert.ToInt32(Mathf.Lerp(0, weapon.weaponStats.SpreadShotsToMaxAngle, SpreadInterpolate));
 
     }
 
@@ -40,13 +40,13 @@ public class WeaponRaycastSpread : MonoBehaviour
             // add spread rampup and spread interpolate
             _spreadRampup++;
             _spreadRampup = Mathf.Clamp(_spreadRampup, 0, weapon.weaponStats.SpreadShotsToMaxAngle);;
-            _spreadInterpolate = weapon.weaponStats.GetSpreadInterpolatePerShot() * _spreadRampup;
+            SpreadInterpolate = weapon.weaponStats.GetSpreadInterpolatePerShot() * _spreadRampup;
             return Vector3.zero;
         }
         // if spread rampup is more than 0, return a spread vector based on spread 
         _spreadRampup++;
         _spreadRampup = Mathf.Clamp(_spreadRampup, 0, weapon.weaponStats.SpreadShotsToMaxAngle);
-        _spreadInterpolate = weapon.weaponStats.GetSpreadInterpolatePerShot() * _spreadRampup;
+        SpreadInterpolate = weapon.weaponStats.GetSpreadInterpolatePerShot() * _spreadRampup;
 
         // calculate spread vector
         Func<float> randomSpread = () => Random.Range(-weapon.weaponStats.GetSpreadAnglePerShot(), weapon.weaponStats.GetSpreadAnglePerShot()) * _spreadRampup;

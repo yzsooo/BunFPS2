@@ -66,7 +66,17 @@ public class PlayerAttack : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (currentWeapon)
+        {
+            ProcessWeaponEquipped();
+        }
+    }
+
+    void ProcessWeaponEquipped()
+    {
         ProcessAttack1();
+        ProcessWeaponCrosshairSize();
+        Debug.Log("Bingus");
     }
 
     void ProcessAttack1()
@@ -78,6 +88,12 @@ public class PlayerAttack : MonoBehaviour
             if (!currentWeapon) { Debug.Log("Weapon not loaded"); return; }
             currentWeapon.StartAttack1();
         }
+    }
+
+    void ProcessWeaponCrosshairSize()
+    {
+        pm.HUD.HUDCrosshair.SetCrosshairMaxSize(currentWeapon.weaponStats.SpreadMaxAngle);
+        pm.HUD.HUDCrosshair.SetCrosshairSize(currentWeapon.attack.RaycastSpread.SpreadInterpolate);
     }
 
     public void InputReload()

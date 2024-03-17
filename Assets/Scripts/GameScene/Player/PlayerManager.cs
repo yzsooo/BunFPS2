@@ -9,12 +9,14 @@ public class PlayerManager : MonoBehaviour
     {
         get { return bLockMouse; }
     }
-
+    [Header("Player Components")]
     public Transform playerTransform;
     public PlayerMovement movement;
     public Camera playerCamera;
     public PlayerLook look;
     public PlayerAttack attack;
+    [Header("External Player-related Components")]
+    public PlayerHUDManager HUD;
 
     // should probably have a func that sets _pm to all the above classes
 
