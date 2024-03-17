@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using Unity.Mathematics;
 
 public class PlayerHUDWeaponStats : MonoBehaviour
 {
@@ -15,6 +16,10 @@ public class PlayerHUDWeaponStats : MonoBehaviour
     public float AmmoBarPerShotLerp = 0.5f;
 
     float _maxAmmo;
+
+    enum AmmoBarStatus { Normal, Reloading };
+    AmmoBarStatus _currentAmmoBarStatus = AmmoBarStatus.Normal;
+
     public int MaxAmmo
     {
         set { _maxAmmo = value; }
@@ -32,8 +37,11 @@ public class PlayerHUDWeaponStats : MonoBehaviour
 
     void SetAmmoBar(int ammo)
     {
+        // if weapon is reloading dont update ammo count
+        if (_currentAmmoBarStatus == AmmoBarStatus.Reloading) { return; }
+        
+        // update ammo count text and animate ammo bar with lerp
         _ammoCount.text = Convert.ToString(ammo);
-        // animate ammo bar with lerp
         float newWidth = Mathf.Lerp(0, baseAmmoBarWidth, Convert.ToSingle(ammo) / _maxAmmo);
         StartCoroutine(LerpAnimateAmmoBar(newWidth));
     }
@@ -51,5 +59,20 @@ public class PlayerHUDWeaponStats : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         yield return null;
+    }
+
+    public void ReloadAmmoBar(float reloadInterp)
+    {
+        // While the weapon is reloading interpolate the ammo bar based on the reload time
+        _currentAmmoBarStatus = AmmoBarStatus.Reloading;
+        Vector2 lerpSizeDelta = _ammoBar.sizeDelta;
+        lerpSizeDelta.x = Mathf.Lerp(0, baseAmmoBarWidth, reloadInterp);
+        _ammoBar.sizeDelta = lerpSizeDelta;
+        
+        // exit once weapon is not reloading
+        if (reloadInterp >= 1)
+        {
+            _currentAmmoBarStatus = AmmoBarStatus.Normal;
+        }
     }
 }

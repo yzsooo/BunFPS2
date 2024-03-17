@@ -150,6 +150,8 @@ public class WeaponObjectAttack : MonoBehaviour
         while (t <= weapon.weaponStats.reloadTime)
         {
             t += Time.deltaTime;
+            // animate HUD ammo bar
+            weapon.playerAttack.pm.HUD.HUDWeaponStats.ReloadAmmoBar(t / weapon.weaponStats.reloadTime);
             yield return new WaitForEndOfFrame();
         }
         EndReload();
