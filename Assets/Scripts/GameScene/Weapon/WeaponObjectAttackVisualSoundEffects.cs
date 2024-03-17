@@ -21,6 +21,17 @@ public class WeaponObjectAttackVisualSoundEffects : MonoBehaviour
     [SerializeField]
     AudioClip _fireSound , _reloadSound;
 
+    void FixedUpdate()
+    {
+        AnimateHUDCrosshair();
+    }
+
+    void AnimateHUDCrosshair()
+    {
+        weapon.playerAttack.pm.HUD.HUDCrosshair.SetCrosshairMaxSize(weapon.weaponStats.SpreadMaxAngle);
+        weapon.playerAttack.pm.HUD.HUDCrosshair.SetCrosshairSize(weapon.attack.RaycastSpread.SpreadInterpolate);
+    }
+
     public void PlayWeaponAnimation(WeaponObjectAnimationManager.weaponAnimation animationToPlay)
     {
         Debug.Log(animationToPlay);
