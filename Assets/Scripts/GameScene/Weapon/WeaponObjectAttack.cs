@@ -109,7 +109,8 @@ public class WeaponObjectAttack : MonoBehaviour
     private Entity ReturnEntityOnCollider(EntityColliderInfo c)
     {
         if (c == null ||
-            c.parentEntity == null)
+            c.parentEntity == null ||
+            !c.parentEntity.CompareTag("Enemy") )
         {
             return null;
         }

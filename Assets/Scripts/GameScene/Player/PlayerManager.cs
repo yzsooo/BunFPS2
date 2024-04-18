@@ -1,15 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
+using Cursor = UnityEngine.Cursor;
 
 public class PlayerManager : MonoBehaviour
 {
+    bool bPlayerEnabled = true;
+    public bool PlayerEnabled
+    {
+        get { return PlayerEnabled; }
+        set { EnablePlayerControl(value); }
+    }
     bool bLockMouse = false;
     public bool MouseLock
     {
         get { return bLockMouse; }
     }
     [Header("Player Components")]
+    public PlayerEntity playerEntity;
     public Transform playerTransform;
     public PlayerMovement movement;
     public Camera playerCamera;
@@ -19,6 +28,13 @@ public class PlayerManager : MonoBehaviour
     public PlayerHUDManager HUD;
 
     // should probably have a func that sets _pm to all the above classes
+
+    void EnablePlayerControl(bool bEnable)
+    {
+        bPlayerEnabled = bEnable;
+        movement.enabled = bPlayerEnabled;
+        look.enabled = bPlayerEnabled;
+    }
 
     public void FlipMouseLock()
     {

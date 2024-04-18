@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameSceneManager : MonoBehaviour
 {
     public static GameSceneManager GameSceneManagerInstance { get; private set; }
-
+    public GameOverManager GameoverManager;
     [Header("Critical Components")]
     public PlayerManager Player;
 
@@ -25,5 +26,10 @@ public class GameSceneManager : MonoBehaviour
         // set GMSI to this object
         GameSceneManagerInstance = this;
         Debug.Log("GameSceneManagerInstance set");
+    }
+
+    public void RestartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

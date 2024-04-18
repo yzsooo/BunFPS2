@@ -6,10 +6,15 @@ using System;
 
 public class EntityHP : MonoBehaviour
 {
+    [SerializeField]
+    protected float currentHP;
     public float maxHP;
-    float currentHP;
-
     public bool bHealthIsEmpty = false;
+    Entity parentEntity;
+    public Entity ParentEntity
+    {
+        set { parentEntity = value; }
+    }
 
     public static event Action HealthIsEmpty;
 
@@ -18,7 +23,7 @@ public class EntityHP : MonoBehaviour
         currentHP = maxHP;
     }
 
-    public void TakeDamage(float damageAmount, Transform source = null)
+    public virtual void TakeDamage(float damageAmount, Transform source = null)
     {
         currentHP -= damageAmount;
 
@@ -26,7 +31,7 @@ public class EntityHP : MonoBehaviour
         {
             currentHP = 0;
             bHealthIsEmpty = true;
-            HealthIsEmpty?.Invoke();
+            parentEntity.OutOfHealth();
         }
     }
 }

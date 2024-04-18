@@ -11,7 +11,7 @@ public class Entity : MonoBehaviour
     public virtual void Awake()
     {
         HP = GetComponent<EntityHP>();
-        EntityHP.HealthIsEmpty += OutOfHealth;
+        HP.ParentEntity = this;
         foreach (Transform t in Mesh)
         {
             t.GetComponent<EntityColliderInfo>().parentEntity = this;
