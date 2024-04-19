@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class PlayerEntity : Entity
 {
-    public override void Awake()
-    {
-        HP = GetComponent<PlayerHP>();
-        HP.ParentEntity = this;
-    }
+    //public override void Awake()
+    //{
+    //    base.Awake();
+    //}
 
     public override void OutOfHealth()
     {

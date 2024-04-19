@@ -10,11 +10,15 @@ public class Entity : MonoBehaviour
 
     public virtual void Awake()
     {
-        HP = GetComponent<EntityHP>();
+        if (HP == null)
+        {
+            HP = GetComponent<EntityHP>();
+        }
         HP.ParentEntity = this;
         foreach (Transform t in Mesh)
         {
-            t.GetComponent<EntityColliderInfo>().parentEntity = this;
+            EntityColliderInfo colliderInfo = t.GetComponent<EntityColliderInfo>();
+            if (colliderInfo != null) { colliderInfo.parentEntity = this; }
         }
     }
 

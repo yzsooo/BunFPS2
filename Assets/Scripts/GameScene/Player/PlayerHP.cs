@@ -5,19 +5,21 @@ using UnityEngine.Rendering;
 
 public class PlayerHP : EntityHP
 {
-    PlayerManager pm;
+    public PlayerManager pm;
     public float startHP;
+    PlayerTakeDamageVisualEffects takeDamageVFX;
     private void Awake()
     {
         currentHP = startHP;
-        pm = GetComponent<PlayerManager>();
         pm.HUD.HUDHealth.SetHealth(currentHP);
+        takeDamageVFX = GetComponent<PlayerTakeDamageVisualEffects>();
     }
 
     public override void TakeDamage(float damageAmount, Transform source = null)
     {
         base.TakeDamage(damageAmount, source);
         pm.HUD.HUDHealth.SetHealth(currentHP);
+        takeDamageVFX.TakeDamageVisualEffects();
     }
 
     public void HealDamage(float healAmount)

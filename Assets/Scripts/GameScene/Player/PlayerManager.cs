@@ -34,6 +34,8 @@ public class PlayerManager : MonoBehaviour
         bPlayerEnabled = bEnable;
         movement.enabled = bPlayerEnabled;
         look.enabled = bPlayerEnabled;
+        attack.enabled = bPlayerEnabled;
+        playerEntity.HP.enabled = bPlayerEnabled;
     }
 
     public void FlipMouseLock()
