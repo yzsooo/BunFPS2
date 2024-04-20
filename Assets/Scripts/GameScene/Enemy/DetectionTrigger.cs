@@ -18,7 +18,9 @@ public class DetectionTrigger : MonoBehaviour
         Vector3 toOther = Vector3.Normalize(other.transform.position - transform.position);
         // check if player can be seen with raycast
         RaycastHit hit;
-        bool ray = Physics.Raycast(transform.position, toOther, out hit);
+        int entityLayerMask = 1 << 8;
+        entityLayerMask = ~entityLayerMask;
+        bool ray = Physics.Raycast(transform.position, toOther, out hit, Mathf.Infinity, entityLayerMask);
         bool raycastValid = (ray && hit.collider.GetComponent<EntityColliderInfo>() != null);
         // detection is valid if;
         // the player is in front of the enemy and

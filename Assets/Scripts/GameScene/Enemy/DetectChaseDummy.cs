@@ -19,11 +19,18 @@ public class DetectChaseDummy : MonoBehaviour
 
     PlayerManager _detectedPlayer;
     NavMeshAgent agent;
+    Animator anim;
+
+    [SerializeField]
+    DetecChaseEnemyCombat combat;
 
     private void Awake()
     {
         detectionTrigger.parent = this;
         agent = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
+        combat.agent = agent;
+        combat.anim = anim;
     }
 
     private void FixedUpdate()
@@ -49,12 +56,14 @@ public class DetectChaseDummy : MonoBehaviour
 
     void UpdateCombatState()
     {
-        agent.SetDestination(_detectedPlayer.transform.position);
+        //agent.SetDestination(_detectedPlayer.transform.position);
+        combat.UpdateState();
     }
 
     public void DetectionTriggered(PlayerManager player)
     {
         _detectedPlayer = player;
         _currentMovementPattern = MovementPattern.Combat;
+        combat.player = player;
     }
 }
