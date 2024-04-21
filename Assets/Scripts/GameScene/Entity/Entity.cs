@@ -25,5 +25,6 @@ public class Entity : MonoBehaviour
     public virtual void OutOfHealth()
     {
         Debug.Log(EntityName + " is Dead");
+        Destroy(gameObject);
     }
 }

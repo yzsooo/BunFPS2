@@ -6,7 +6,7 @@ public class DetectionTrigger : MonoBehaviour
 {
     [SerializeField]
     bool _bCanSeePlayer = false;
-    public DetectChaseDummy parent;
+    public EnemyBehaviour parent;
 
     private void OnTriggerStay(Collider other)
     {

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerDamageCollider : MonoBehaviour
 {
     public float damageAmount = 10.0f;
+    public bool bDestroyOnContact = false;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -14,6 +15,7 @@ public class PlayerDamageCollider : MonoBehaviour
         if (pm != null)
         {
             pm.playerEntity.HP.TakeDamage(damageAmount);
+            if (bDestroyOnContact) { Destroy(gameObject); }
         }
     }
 }

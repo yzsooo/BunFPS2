@@ -26,7 +26,7 @@ public class DetectChaseDummy : MonoBehaviour
 
     private void Awake()
     {
-        detectionTrigger.parent = this;
+        //detectionTrigger.parent = this;j
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         combat.agent = agent;
