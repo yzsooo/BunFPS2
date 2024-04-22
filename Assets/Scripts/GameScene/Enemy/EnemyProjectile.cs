@@ -32,4 +32,18 @@ public class EnemyProjectile : MonoBehaviour
         Destroy(gameObject);
         yield return null;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(collision.transform.name);
+        Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<PlayerManager>() == null)
+        {
+            Destroy(gameObject);
+        }
+    }
 }

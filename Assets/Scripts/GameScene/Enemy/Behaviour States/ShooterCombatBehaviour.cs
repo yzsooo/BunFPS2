@@ -67,8 +67,11 @@ public class ShooterCombatBehaviour : EnemyBehaviourState
 
         _bPlayerInSight = raycastValid;
 
-        // if player is not in line of sight then end
-        if (!_bPlayerInSight) { return; }
+        // if player is not in line of sight then move towards player until it can
+        if (!_bPlayerInSight)
+        {
+            agent.SetDestination(player.transform.position);
+        }
         // look at player 
         parent.transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
     }
@@ -96,11 +99,11 @@ public class ShooterCombatBehaviour : EnemyBehaviourState
         {
             if (Random.value < reattackChance)
             {
+                _bPlayerInSight = false;
                 _currentState = ShooterState.Wander;
             }
             else
             {
-                Debug.Log("repeating attack");
                 _bIsAttacking = false;
             }
         }
@@ -127,7 +130,6 @@ public class ShooterCombatBehaviour : EnemyBehaviourState
         }
         if (_bIsWandering)
         {
-            Debug.Log(agent.hasPath);
             if (!agent.hasPath)
             {
                 _bIsWandering = false;
@@ -135,46 +137,5 @@ public class ShooterCombatBehaviour : EnemyBehaviourState
                 _currentState = ShooterState.Attack;
             }
         }
-        //Debug.Log(agent.hasPath);
-        //if (_bIsWandering && !agent.hasPath)
-        //{
-        //    Debug.Log("Reached target");
-        //}
     }
-    //void Wander()
-    //{
-    //    // set wander destination if not set
-    //    if (!_bIsWandering)
-    //    {
-    //        NavMeshPath path = new NavMeshPath();
-    //        bool bPathValid = false;
-    //        while (!bPathValid)
-    //        {
-    //            Vector3 wanderOffset = Random.insideUnitSphere * wanderRange;
-    //            wanderOffset.y = 0;
-    //            wanderPosition = transform.position + wanderOffset;
-    //            bPathValid = agent.CalculatePath(wanderPosition, path);
-    //        }
-    //        _bIsWandering = true;
-    //        agent.SetDestination(wanderPosition);
-    //    }
-
-    //    Debug.Log(agent.remainingDistance +" "+ agent.hasPath);
-
-    //    _bIsWandering = agent.hasPath && agent.remainingDistance > 0.0f;
-
-    //    // if the enemy reached the destination go back to attacking
-    //    if (!_bIsWandering)
-    //    {
-    //        StartCoroutine(WanderToAttackState());
-    //    }
-    //}
-
-    //IEnumerator WanderToAttackState()
-    //{
-    //    yield return new WaitForSeconds(attackDuration);
-    //    _bIsAttacking = false;
-    //    _currentState = ShooterState.Attack;
-    //    yield return null;
-    //}
 }
