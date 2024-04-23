@@ -10,9 +10,26 @@ public class StartGoalGateManager : MonoBehaviour
     StartGoalGate _goalGate;
     bool _bPlayerEntered = false;
 
+    public Transform enemyCollection;
+    int _enemyCount = 0;
+
     private void Awake()
     {
         SetStartGoalGates();
+        _enemyCount = CountEnemy();
+        SetEnemyCollectionActive(false);
+    }
+    int CountEnemy()
+    {
+        int count = 0;
+        foreach (Transform t in enemyCollection)
+        {
+            if (t.GetComponent<Entity>() != null)
+            {
+                count += 1;
+            }
+        }
+        return count;
     }
 
     void SetStartGoalGates()
@@ -35,18 +52,36 @@ public class StartGoalGateManager : MonoBehaviour
 
     public void PlayerEnteredGate(StartGoalGate.GateType gateType)
     {
-        // mark player entering gate depending on the gate type
+        // Start gate
+        // reset timer and activate enemies
         if (!_bPlayerEntered && gateType == StartGoalGate.GateType.Start)
         {
+            Debug.Log("Player start");
             _bPlayerEntered = true;
+            levelTimer.currentTime = 0.0f;
             levelTimer.timerActive = true;
-            Debug.Log("Player entered");
+            SetEnemyCollectionActive(true);
         }
+
+        // Goal gate
+        // turn off timer, deactivate enemies and count how many are still alive
         if (_bPlayerEntered && gateType == StartGoalGate.GateType.Goal)
         {
+
+            Debug.Log("Player reached goal");
             _bPlayerEntered = false;
             levelTimer.timerActive = false;
-            Debug.Log("Player reached goal");
+            SetEnemyCollectionActive(false);
+            Debug.Log("Remaining enemies; " + CountEnemy().ToString());
+            GameSceneManager.GameSceneManagerInstance.ScoreCalculation.CalculateScore(levelTimer.currentTime, CountEnemy());
+        }
+    }
+
+    void SetEnemyCollectionActive(bool bActive)
+    {
+        foreach (Transform t in enemyCollection)
+        {
+            t.gameObject.SetActive(bActive);
         }
     }
 }

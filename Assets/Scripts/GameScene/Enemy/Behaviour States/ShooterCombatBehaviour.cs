@@ -82,7 +82,8 @@ public class ShooterCombatBehaviour : EnemyBehaviourState
         if (!_bPlayerInSight || _bIsAttacking) { return; }
         _bIsAttacking = true;
         Transform proj = Instantiate(projectile, projectileSpawnPosition.position, projectileSpawnPosition.transform.rotation);
-        proj.GetComponent<EnemyProjectile>().SpawnProjectile(projectileSpeed, projectileDamage, transform.forward.normalized);
+        Vector3 toPlayer = Vector3.Normalize(player.transform.position - transform.position);
+        proj.GetComponent<EnemyProjectile>().SpawnProjectile(projectileSpeed, projectileDamage, toPlayer);
         _bIsAttacking = true;
         // start coroutine to reset attack bool
         StartCoroutine(ResetAttacking(true));

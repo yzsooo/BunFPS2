@@ -5,14 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class GameSceneManager : MonoBehaviour
 {
+    public LevelInfoScriptableObject LevelInfo;
     public static GameSceneManager GameSceneManagerInstance { get; private set; }
     public GameOverManager GameoverManager;
+    public ScoreCalculation ScoreCalculation;
     [Header("Critical Components")]
     public PlayerManager Player;
 
     private void Awake()
     {
         SetGameSceneManagerInstance();
+        GameoverManager = GetComponent<GameOverManager>();
+        ScoreCalculation = GetComponent<ScoreCalculation>();
     }
 
     void SetGameSceneManagerInstance()

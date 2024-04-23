@@ -16,6 +16,7 @@ public class GameOverManager : MonoBehaviour
         gameoverCamera.gameObject.SetActive(true);
         GameSceneManager.GameSceneManagerInstance.Player.playerCamera.enabled = false;
         // turn off player hud
+        GameSceneManager.GameSceneManagerInstance.Player.HUD.gameObject.SetActive(false);
         // turn on gameover hud 
     }
 }

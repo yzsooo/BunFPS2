@@ -1,0 +1,46 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Security;
+using UnityEngine;
+
+public class ScoreCalculation : MonoBehaviour
+{
+
+    float totalTime;
+    string scoreRank;
+    float baseTime;
+    int enemyCount;
+
+    public void CalculateScore(float goalTime, int remainingEnemies)
+    {
+        baseTime = goalTime;
+        enemyCount = remainingEnemies;
+
+        LevelInfoScriptableObject levelinfo = GameSceneManager.GameSceneManagerInstance.LevelInfo;
+        // Calculate score based on the base time and remaining enemies
+        float pentalty = levelinfo.PentaltyPerMissedEnemy * remainingEnemies;
+        Debug.Log("Missed enemies: " + remainingEnemies + ", penalty: " + pentalty);
+        totalTime = baseTime + pentalty;
+        // see which rank it achieved
+        Dictionary<float, string> ranks = new Dictionary<float, string>
+        {
+            {levelinfo.ScoreTarget_RankS, "S" },
+            {levelinfo.ScoreTarget_RankA, "A" },
+            {levelinfo.ScoreTarget_RankB, "B" },
+
+        };
+
+        foreach (KeyValuePair<float, string>kvp in ranks)
+        {
+            if (totalTime <= kvp.Key)
+            {
+                scoreRank = kvp.Value;
+                break;
+            }
+            // if total time is outside S, A or B range then rank is C
+            scoreRank = "C";
+        }
+        Debug.Log("Player score is "+ totalTime + ", rank is " + scoreRank);
+    }
+}
