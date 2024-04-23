@@ -90,7 +90,7 @@ public class WeaponObjectAttack : MonoBehaviour
         // deal damage to enemy on collision
         if (entityOnHit != null)
         {
-            entityOnHit.HP.TakeDamage(weapon.weaponStats.damage);
+            entityOnHit.HP.TakeDamage(weapon.weaponStats.damage, transform);
             Debug.Log("Damaged");
         }
         // expend ammo

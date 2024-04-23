@@ -9,6 +9,7 @@ public class PlayerHUDManager : MonoBehaviour
     public PlayerHUDCrosshair HUDCrosshair;
     public PlayerHUDWeaponStats HUDWeaponStats;
     public PlayerHUDHealth HUDHealth;
+    public PlayerHUDTimer HUDTimer;
 
     public void Awake()
     {
