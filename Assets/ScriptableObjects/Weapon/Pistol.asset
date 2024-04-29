@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: 
   weaponName: defpistol
+  weaponPrefab: {fileID: 8111389077132608587, guid: 42c6b80d0f6d605499dc34f67a02cce9, type: 3}
   roundsPerMagazine: 15
-  roundsPerMinute: 450
+  roundsPerMinute: 550
   damage: 10
   reloadTime: 1
   RecoilAnglePerShot: 40

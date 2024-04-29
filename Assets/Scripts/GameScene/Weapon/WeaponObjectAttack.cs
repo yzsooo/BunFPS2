@@ -45,6 +45,7 @@ public class WeaponObjectAttack : MonoBehaviour
         ProcessHUDWeaponStats();
     }
 
+    // update ammo count for the weapon in the HUD
     void ProcessHUDWeaponStats()
     {
         weapon.playerAttack.pm.HUD.HUDWeaponStats.MaxAmmo = weapon.weaponStats.roundsPerMagazine;

@@ -248,6 +248,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 0}
+  Raycast: {fileID: 0}
+  RaycastSpread: {fileID: 0}
   _firerateTimer: 0
   _currentWeaponState: 0
 --- !u!114 &2872092996239969632
@@ -294,6 +296,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 0}
+  _spreadRampup: 0
+  SpreadInterpolate: 0
 --- !u!114 &3435002033054612715
 MonoBehaviour:
   m_ObjectHideFlags: 0

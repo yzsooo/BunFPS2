@@ -43,6 +43,7 @@ public class PlayerHUDWeaponStats : MonoBehaviour
         // update ammo count text and animate ammo bar with lerp
         _ammoCount.text = Convert.ToString(ammo);
         float newWidth = Mathf.Lerp(0, baseAmmoBarWidth, Convert.ToSingle(ammo) / _maxAmmo);
+        if (!gameObject.activeSelf) { return; }
         StartCoroutine(LerpAnimateAmmoBar(newWidth));
     }
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 
@@ -7,6 +8,7 @@ using UnityEngine;
 public class WeaponScriptableObject : ScriptableObject
 {
     public string weaponName;
+    public WeaponObject weaponPrefab;
     [Header("Stats")]
     public int roundsPerMagazine;
     public float roundsPerMinute;

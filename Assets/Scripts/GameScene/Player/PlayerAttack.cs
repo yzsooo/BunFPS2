@@ -41,7 +41,7 @@ public class PlayerAttack : MonoBehaviour
         currentWeapon.cam = _cam;
         currentWeapon.playerAttack = this;
     }
-
+    
     public void RemoveLoadedWeapon()
     {        
         // destroy exising weapon if it has one

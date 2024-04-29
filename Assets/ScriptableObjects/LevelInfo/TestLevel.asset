@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 034bebe9744a816418234ad8c2b3456c, type: 3}
   m_Name: TestLevel
   m_EditorClassIdentifier: 
-  LevelName: 
+  LevelName: TestLevel
+  SceneName: SampleScene
   PentaltyPerMissedEnemy: 1
+  ScoreTarget_RankS: 10
+  ScoreTarget_RankA: 15
+  ScoreTarget_RankB: 30

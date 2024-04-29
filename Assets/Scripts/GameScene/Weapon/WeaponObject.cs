@@ -35,6 +35,14 @@ public class WeaponObject : MonoBehaviour
         attack.weapon = this;
     }
 
+    public bool IsWeaponLoaded()
+    {
+        if (!cam || !playerAttack || !weaponStats || !ViewmodelCamera)
+        {
+            return false;
+        }
+        return true;
+    }
     public bool StartAttack1()
     {
         bool attackIsValid = attack.StartAttack1();

@@ -5,8 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class GameSceneManager : MonoBehaviour
 {
+    // this script is set to execute last so a lot of game start/game over and state transition stuff should be done here
+
     public LevelInfoScriptableObject LevelInfo;
     public static GameSceneManager GameSceneManagerInstance { get; private set; }
+
     public GameOverManager GameoverManager;
     public ScoreCalculation ScoreCalculation;
     [Header("Critical Components")]
@@ -17,8 +20,26 @@ public class GameSceneManager : MonoBehaviour
         SetGameSceneManagerInstance();
         GameoverManager = GetComponent<GameOverManager>();
         ScoreCalculation = GetComponent<ScoreCalculation>();
+        LoadPlayerOptions();
+        Player.HUD.ChangeHUDMode(PlayerHUDManager.PlayerHUDMode.Full);
     }
 
+    IEnumerator testload()
+    {
+        yield return new WaitForSeconds(5.0f);
+        LoadPlayerOptions();
+        yield return null;
+    }
+
+    // Give player the selected weapon in PlayerOptions
+    public void LoadPlayerOptions()
+    {
+        Debug.Log("Load player options");
+        if (!PlayerOptionsManager.PlayerOptionsInstance) { return; }
+        Player.attack.LoadWeapon(PlayerOptionsManager.PlayerOptionsInstance.selectedWeapon.weaponPrefab);
+    }
+
+    // Set GameSceneManager singleton
     void SetGameSceneManagerInstance()
     {
         // Check if GSMI already exists and do nothing if it is
@@ -30,10 +51,5 @@ public class GameSceneManager : MonoBehaviour
         // set GMSI to this object
         GameSceneManagerInstance = this;
         Debug.Log("GameSceneManagerInstance set");
-    }
-
-    public void RestartScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

@@ -6,6 +6,6 @@ public class RestartScene : DebugUISubmenuButton
 {
     public override void UseButton()
     {
-        GameSceneManager.GameSceneManagerInstance.RestartScene();
+        SceneLoader.SceneLoaderInstance.RestartScene();
     }
 }
