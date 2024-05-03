@@ -12,6 +12,8 @@ public class ScoreCalculation : MonoBehaviour
     float baseTime;
     int enemyCount;
 
+    // Calculate the score based on time and enemies left unkilled
+    // based on the level's rank targets, determine which score the player achived; S, A, B or C
     public void CalculateScore(float goalTime, int remainingEnemies)
     {
         baseTime = goalTime;
@@ -19,6 +21,7 @@ public class ScoreCalculation : MonoBehaviour
 
         LevelInfoScriptableObject levelinfo = GameSceneManager.GameSceneManagerInstance.LevelInfo;
         // Calculate score based on the base time and remaining enemies
+        // total score is goal time + (number of remaining enemies * penalty per missed enemy)
         float pentalty = levelinfo.PentaltyPerMissedEnemy * remainingEnemies;
         Debug.Log("Missed enemies: " + remainingEnemies + ", penalty: " + pentalty);
         totalTime = baseTime + pentalty;

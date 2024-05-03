@@ -18,6 +18,7 @@ public class WeaponRaycastSpread : MonoBehaviour
         ProcessSpread();
     }
 
+    // Reduce spread overtime 
     void ProcessSpread()
     {
         // dont reduce spread if weapon is used
@@ -30,6 +31,7 @@ public class WeaponRaycastSpread : MonoBehaviour
 
     }
 
+    // return a vector going on a random direction based on max spread angle and current weapon spread interpolate
     public Vector3 GetSpreadVector()
     {
         Vector3 spreadVector;

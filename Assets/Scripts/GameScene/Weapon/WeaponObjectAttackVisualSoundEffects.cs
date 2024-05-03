@@ -26,12 +26,14 @@ public class WeaponObjectAttackVisualSoundEffects : MonoBehaviour
         AnimateHUDCrosshair();
     }
 
+    // update the size of crosshair on hud
     void AnimateHUDCrosshair()
     {
         weapon.playerAttack.pm.HUD.HUDCrosshair.SetCrosshairMaxSize(weapon.weaponStats.SpreadMaxAngle);
         weapon.playerAttack.pm.HUD.HUDCrosshair.SetCrosshairSize(weapon.attack.RaycastSpread.SpreadInterpolate);
     }
 
+    // Play the animation, sounds and visual effects for each animation
     public void PlayWeaponAnimation(WeaponObjectAnimationManager.weaponAnimation animationToPlay)
     {
         Debug.Log(animationToPlay);
@@ -55,6 +57,7 @@ public class WeaponObjectAttackVisualSoundEffects : MonoBehaviour
         }
     }
 
+    // play firing animation with sound and muzzle flash coming from the barrel, add recoil to the camera
     void PlayFireAnimation()
     {
         weapon.weaponAnimation.PlayerWeaponAnimation(WeaponObjectAnimationManager.weaponAnimation.Fire);
@@ -67,6 +70,7 @@ public class WeaponObjectAttackVisualSoundEffects : MonoBehaviour
         PlayFireCameraRecoil();
     }
 
+    // add a randomized recoil vector to the camera
     void PlayFireCameraRecoil()
     {
         // Get vector that has a randomized recoil going upwards and sideways
@@ -81,6 +85,7 @@ public class WeaponObjectAttackVisualSoundEffects : MonoBehaviour
             );
     }
 
+    // create a bullet hole decal at the point whre the bullet hits
     public void CreateBulletHoleDecal(RaycastHit hit)
     {
         // play bullet hit particle at the hit position
@@ -91,11 +96,13 @@ public class WeaponObjectAttackVisualSoundEffects : MonoBehaviour
         Destroy(bulletholeDecal, 10f);
     }
 
+    // play reload start animation
     void PlayReloadIn()
     {
         weapon.weaponAnimation.PlayerWeaponAnimation(WeaponObjectAnimationManager.weaponAnimation.ReloadIn);
     }
 
+    // play reload end animation with a reload sound
     void PlayReloadOut()
     {
         weapon.weaponAnimation.PlayerWeaponAnimation(WeaponObjectAnimationManager.weaponAnimation.ReloadOut);

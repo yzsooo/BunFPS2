@@ -27,6 +27,7 @@ public class SceneLoader : MonoBehaviour
         StartCoroutine(LoadSceneCoroutine(sceneName));
     }
 
+    // Load new scene asynchronously until loading is done, and turn off loading transition when it is
     IEnumerator LoadSceneCoroutine(string sceneName)
     {
         yield return null;

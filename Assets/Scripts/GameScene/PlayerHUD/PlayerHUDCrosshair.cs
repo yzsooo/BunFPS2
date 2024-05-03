@@ -16,12 +16,13 @@ public class PlayerHUDCrosshair : MonoBehaviour
         _crosshairRect = GetComponent<RectTransform>();
     }
 
+    // based on the current weapon's max spread change the max spread of the crosshair
     public void SetCrosshairMaxSize(float maxWeaponSpreadAngle)
     {
-        // based on the current weapon's max spread change the max spread of the crosshair
         _crosshairRectMaxSize = Vector2.one * CrosshairCanvasMaxHeight * maxWeaponSpreadAngle;
     }
 
+    // set the size of the crosshair based on the previously set base and max size
     public void SetCrosshairSize(float weaponSpreadInterpolate)
     {
         _crosshairRect.sizeDelta = Vector2.Lerp(_crosshairRectBaseSize, _crosshairRectMaxSize, weaponSpreadInterpolate);

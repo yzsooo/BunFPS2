@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyBehaviour : MonoBehaviour
 {
+    // Enemy movement patterns
+    // Idle: enemy doesnt do anything
+    // Combat: enemy is actively chasing the player and fighting them
     public enum MovementPattern
     {
         Idle,
@@ -27,11 +28,12 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void Awake()
     {
+        // set variables
         detection.parent = this;
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
 
-        // set vars on states
+        // set variables on states
         List<EnemyBehaviourState> states = new List<EnemyBehaviourState>(){ combat, idle };
 
         foreach (EnemyBehaviourState state in states)
@@ -41,7 +43,7 @@ public class EnemyBehaviour : MonoBehaviour
             state.agent = agent;
             state.anim = anim;
         }
-
+        // change state to the initialized movement pattern (Idle by default)
         SwitchState(_currentMovementPattern);
     }
 
@@ -50,6 +52,7 @@ public class EnemyBehaviour : MonoBehaviour
         ProcessState();
     }
 
+    // call the UpdateState function on the current state
     void ProcessState()
     {
         if (currentState != null)
@@ -58,9 +61,11 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
+    // switch to the selected movementpattern
     void SwitchState(MovementPattern switchTo)
     {
         _currentMovementPattern = switchTo;
+        // could use a dict for this
         switch(switchTo)
         {
             case MovementPattern.Idle:
@@ -76,6 +81,8 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
+    // Called by the detectionTrigger child object
+    // change state to Combat and set the detected player object in the combat state
     public void DetectionTriggered(PlayerManager player)
     {
         SwitchState(MovementPattern.Combat);

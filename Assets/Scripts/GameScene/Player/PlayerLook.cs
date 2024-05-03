@@ -46,6 +46,7 @@ public class PlayerLook : MonoBehaviour
         ApplyCameraRotation();
     }
 
+    // calculate camera rotation of mouse look (up-down only)
     private void CalculateRotationVector()
     {
         // calculate up-down look
@@ -55,20 +56,21 @@ public class PlayerLook : MonoBehaviour
         _intendedRotation = _rotationVector;
     }
 
+    // interpolate between the intended rotation (the rotation of mouse) and composite rotation (total sum of camera rotation)
     private void CalculateActualRotation()
     {
         _actualRotation = Vector3.Lerp(_intendedRotation, _intendedRotation + _compositeRotation, _compositeRotationInterpolate);
     }
 
+    // Add recoil to camera by adding the recoil vector into the intended camera look by lerp
     void CalculateRecoil()
     {
-        // Add recoil to camera by adding the recoil vector into the intended camera look by lerp
         _actualRotation = Vector3.Lerp(_intendedRotation, _intendedRotation + CameraRecoil.CompositeVector, CameraRecoil.RecoilInterpolate);
     }
 
+    // add left-right look by rotating parent transform
     private void ApplyCameraRotation()
     {
-        // add left-right look by rotating parent transform
         pm.playerTransform.Rotate(Vector3.up * (_mouseInput.x * Time.deltaTime) * Sensitivity);
         cam.transform.localRotation = Quaternion.Euler(_actualRotation.x, _actualRotation.y, 0f);
     }

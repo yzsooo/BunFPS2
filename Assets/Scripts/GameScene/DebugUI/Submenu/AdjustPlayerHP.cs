@@ -9,6 +9,7 @@ public class AdjustPlayerHP : DebugUISubmenuButton
     [SerializeField]
     bool bHeal;
 
+    // damage or heal the player's hp by adjustAmount
     public override void UseButton()
     {
         PlayerHP HPComponent = GameSceneManager.GameSceneManagerInstance.Player.playerEntity.HP as PlayerHP;
@@ -20,15 +21,5 @@ public class AdjustPlayerHP : DebugUISubmenuButton
         {
             HPComponent.TakeDamage(adjustAmount);
         }
-        //if (HPAmountToAdjust > 0)
-        //{
-        //    // Heal
-        //    HPComponent.HealDamage(HPAmountToAdjust);
-        //}
-        //else
-        //{
-        //    // deal damage
-        //    HPComponent.TakeDamage(HPAmountToAdjust);
-        //}
     }
 }

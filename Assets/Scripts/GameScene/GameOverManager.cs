@@ -35,6 +35,7 @@ public class GameOverManager : MonoBehaviour
     //}
 
     // called by other gameobjects when the game is done
+    // Disable player controls, switch to gameover thirdperson camera and switch to gameover hud
     public void GameOver()
     {
         Debug.Log("Gameover called");

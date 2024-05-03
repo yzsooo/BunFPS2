@@ -35,6 +35,7 @@ public class PlayerHUDWeaponStats : MonoBehaviour
         baseAmmoBarWidth = _ammoBar.sizeDelta.x;
     }
 
+    // set the ammo count on hud and resize the ammo bar based on max ammo count with coroutine animation
     void SetAmmoBar(int ammo)
     {
         // if weapon is reloading dont update ammo count
@@ -47,6 +48,7 @@ public class PlayerHUDWeaponStats : MonoBehaviour
         StartCoroutine(LerpAnimateAmmoBar(newWidth));
     }
 
+    // resize ammo bar to set width overtime
     IEnumerator LerpAnimateAmmoBar(float newWidth)
     {
         float t = AmmoBarPerShotLerp;
@@ -62,6 +64,7 @@ public class PlayerHUDWeaponStats : MonoBehaviour
         yield return null;
     }
 
+    // Refill the ammo bar based on weapon's reloadInterp (the reload time of the weapons)
     public void ReloadAmmoBar(float reloadInterp)
     {
         // While the weapon is reloading interpolate the ammo bar based on the reload time

@@ -9,6 +9,7 @@ public class MeleeCombatBehaviour : EnemyBehaviourState
     bool _bPlayerInRange;
     bool _bIsAttacking;
 
+    // Move to the player until its in melee range, then attack
     public override void UpdateState()
     {
         if (!_bPlayerInRange && !_bIsAttacking)
@@ -21,17 +22,23 @@ public class MeleeCombatBehaviour : EnemyBehaviourState
         }
     }
 
-    // Trigger
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player")) { return; }
-        _bPlayerInRange = true;
+        OnTriggerSetPlayerInRange(other.GetComponent<PlayerManager>());
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!other.CompareTag("Player")) { return; }
-        _bPlayerInRange = false;
+        OnTriggerSetPlayerInRange(other.GetComponent<PlayerManager>(), true);
+    }
+
+    // Called by OnTriggerEnter and OnTriggerExit
+    // Check if the collider is a player and set bPlayerInRange;
+    // bExit is for TriggerExit
+    void OnTriggerSetPlayerInRange(PlayerManager pm, bool bExit = false)
+    {
+        if (pm == null) { return; }
+        _bPlayerInRange = !bExit;
     }
 
     // Attacking
@@ -49,9 +56,9 @@ public class MeleeCombatBehaviour : EnemyBehaviourState
         anim.SetTrigger("Attack");
     }
 
+    // Wait attackDuration seconds and allow enemy to attack again
     IEnumerator ResetAttacking()
     {
-        // reset attack bool
         yield return new WaitForSeconds(attackDuration);
         _bIsAttacking = false;
         yield return null;

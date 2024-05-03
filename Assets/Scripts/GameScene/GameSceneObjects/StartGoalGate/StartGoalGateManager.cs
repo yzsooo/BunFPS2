@@ -19,6 +19,8 @@ public class StartGoalGateManager : MonoBehaviour
         _enemyCount = CountEnemy();
         SetEnemyCollectionActive(false);
     }
+
+    // count how many enemies are in enemyCollection
     int CountEnemy()
     {
         int count = 0;
@@ -32,6 +34,7 @@ public class StartGoalGateManager : MonoBehaviour
         return count;
     }
 
+    // set start and goal gate variables and set their parent var
     void SetStartGoalGates()
     {
         foreach (Transform t in transform)
@@ -50,6 +53,7 @@ public class StartGoalGateManager : MonoBehaviour
         }
     }
 
+    // called from the gates, either start the level timer or end it
     public void PlayerEnteredGate(StartGoalGate.GateType gateType)
     {
         // Start gate
@@ -77,6 +81,7 @@ public class StartGoalGateManager : MonoBehaviour
         }
     }
 
+    // toggle enemies in enemyCollection active or inactive
     void SetEnemyCollectionActive(bool bActive)
     {
         foreach (Transform t in enemyCollection)

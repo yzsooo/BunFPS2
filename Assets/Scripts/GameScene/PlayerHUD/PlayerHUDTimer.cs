@@ -12,6 +12,7 @@ public class PlayerHUDTimer : MonoBehaviour
         text = GetComponent<TextMeshProUGUI>();
     }
 
+    // set the timer text with 0.00 format
     public void SetTime(float currentTime)
     {
         text.text = currentTime.ToString("0.00");

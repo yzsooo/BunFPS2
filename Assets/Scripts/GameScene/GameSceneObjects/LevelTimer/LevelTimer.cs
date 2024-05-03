@@ -15,6 +15,7 @@ public class LevelTimer : MonoBehaviour
         UpdateTimer();
     }
 
+    // Update HUD's timer if the timer is active
     void UpdateTimer()
     {
         // if timer is inactive disable text on HUD

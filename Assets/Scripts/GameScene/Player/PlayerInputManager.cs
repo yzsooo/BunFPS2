@@ -20,6 +20,7 @@ public class PlayerInputManager : MonoBehaviour
         BindInputActions();
     }
 
+    // set up PlayerInput actions
     void InitializeInput()
     {
         _playerInput = new PlayerInput();
@@ -33,6 +34,7 @@ public class PlayerInputManager : MonoBehaviour
         _pm = GetComponent<PlayerManager>();
     }
 
+    // bind InputActions to movement and attack functions
     void BindInputActions()
     {
         // move actions
@@ -53,6 +55,7 @@ public class PlayerInputManager : MonoBehaviour
         ProcessInputActions();
     }
 
+    // update mouse and movement input
     void ProcessInputActions()
     {
         // move actions
@@ -64,6 +67,7 @@ public class PlayerInputManager : MonoBehaviour
         _pm.attack.InputMouseVector(_lookActions.Look.ReadValue<Vector2>());
     }
 
+    // enable input actions
     private void OnEnable()
     {
         _moveActions.Enable();
@@ -71,6 +75,7 @@ public class PlayerInputManager : MonoBehaviour
         _attackActions.Enable();
     }
 
+    // disable input actions
     private void OnDisable()
     {
         _moveActions.Disable();

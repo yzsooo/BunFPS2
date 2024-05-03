@@ -15,6 +15,7 @@ public class WeaponObjectAnimationManager : MonoBehaviour
         ReloadOut
     }
 
+    // play the animation in anim variabld
     public void PlayerWeaponAnimation(weaponAnimation anim = weaponAnimation.Idle)
     {
         ResetAnimationTrigger();
@@ -43,6 +44,7 @@ public class WeaponObjectAnimationManager : MonoBehaviour
         }
     }
 
+    // reset animation trigger
     void ResetAnimationTrigger()
     {
         foreach (Animator a in Animators)

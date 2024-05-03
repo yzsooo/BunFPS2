@@ -26,6 +26,7 @@ public class PlayerCameraRecoil : MonoBehaviour
         CalculateCompositeVector();
     }
 
+    // update camera's recoil vars and update the camera's target rotation vector
     public void AddRecoil(Vector3 direction, float kickSeconds, float recoverSeconds, float maxAngle)
     {
         // Make new target vector as the composite of current recoil and newly added recoil with set maximum angle
@@ -38,6 +39,10 @@ public class PlayerCameraRecoil : MonoBehaviour
         _recoilInterpolate = _recoilKickSeconds + _recoilRecoverSeconds;
     }
 
+    // update the camera's composite vector depending on the recoilInterpolate value
+    // >1 initial recoil
+    // < 1 && > 0 recovering from the recoil
+    // <= 0 finished recoil, reset target and composite vector
     void CalculateCompositeVector()
     {
         // initial recoil

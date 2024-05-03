@@ -9,6 +9,7 @@ public class GameoverCamera : MonoBehaviour
 
     private void Update()
     {
+        // rotate around the player's position overtime
         cameraAnchor.Rotate(Vector3.up * cameraTurnSpeed * Time.deltaTime);
     }
 }

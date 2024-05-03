@@ -22,6 +22,6 @@ public class DebugUIButton : MonoBehaviour
     // Flip visibility of submenu
     public void ToggleSubmenu()
     {
-        _submenu.gameObject.SetActive(!_submenu.gameObject.active);
+        _submenu.gameObject.SetActive(!_submenu.gameObject.activeSelf);
     }
 }

@@ -18,11 +18,13 @@ public class SelectionContainerUI : MonoBehaviour
         GetComponent<Button>().onClick.AddListener(SelectThisContainer);
     }
 
+    // virtual func for setting up the container ui with names and icon
     public virtual void SetContainerUI()
     {
 
     }
 
+    // virtual func for when this container is pressed
     public virtual void SelectThisContainer()
     {
         

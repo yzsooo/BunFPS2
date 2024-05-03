@@ -42,9 +42,9 @@ public class PlayerAttack : MonoBehaviour
         currentWeapon.playerAttack = this;
     }
     
+    // remove player's equipped weapon by destroying the gameObject
     public void RemoveLoadedWeapon()
-    {        
-        // destroy exising weapon if it has one
+    {
         if (currentWeapon)
         {
             Destroy(currentWeapon.gameObject);
@@ -52,16 +52,17 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    // set _battack1 to true when the player has Attack1 input
     public void InputStartAttack1()
     {
         _battack1 = true;
     }
 
+    // set battack1 to false, and call the stopattack1 function in the equipped weapon
     public void InputStopAttack1()
     {
         _battack1 = false;
-        if (!currentWeapon) { return; }
-        currentWeapon.StopAttack1();
+        if (currentWeapon) { currentWeapon.StopAttack1(); }
     }
 
     private void FixedUpdate()
@@ -71,15 +72,16 @@ public class PlayerAttack : MonoBehaviour
             ProcessWeaponEquipped();
         }
     }
-
+    
+    // process Attack1 input in the equipped weapon
     void ProcessWeaponEquipped()
     {
         ProcessAttack1();
     }
 
+    // If the player is inputting Attack1, use the equipped weapon's attack
     void ProcessAttack1()
     {
-        // if the player is getting input to attack, use the weapon's attack
         if (_battack1)
         {
             // if the player doesnt have any weapon then break out of the loop
@@ -88,18 +90,21 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    // If the player has a weapon equipped, reload the equipped weapon
     public void InputReload()
     {
         if (!currentWeapon) { return; }
         currentWeapon.Reload();
     }
 
+    // update the mouse input to the viewmodel swayer
     public void InputMouseVector(Vector2 input)
     {
         if (!currentWeapon) { return; }
         currentWeapon.ViewmodelSwayer.UpdateMouseVector(input);
     }
 
+    // update the movement input to the viewmodel swayer
     public void InputMovementVector(Vector2 input)
     {
         if (!currentWeapon) { return; }

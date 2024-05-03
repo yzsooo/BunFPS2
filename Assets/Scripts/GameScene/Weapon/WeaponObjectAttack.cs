@@ -52,6 +52,7 @@ public class WeaponObjectAttack : MonoBehaviour
         weapon.playerAttack.pm.HUD.HUDWeaponStats.AmmoCount = _currentRoundsInMagazine;
     }
 
+    // if the weapon can be fired, attack with raycast 
     public bool StartAttack1()
     {
         _bIsFiring = true;
@@ -64,6 +65,7 @@ public class WeaponObjectAttack : MonoBehaviour
         
     }
 
+    // returns true if the weapon is in a state where it can be fired
     protected virtual bool WeaponCanFire()
     {
         if (_currentRoundsInMagazine > 0 &&
@@ -77,6 +79,9 @@ public class WeaponObjectAttack : MonoBehaviour
         return false;
     }
 
+    // shoot a raycast and damagr whatever entity it hits
+    // play firing animation and sounds
+    // set state to Firing and start a timer until it can be fired again
     protected void AttackWithRaycast()
     {
         _currentWeaponState = WeaponState.Firing;
@@ -107,8 +112,10 @@ public class WeaponObjectAttack : MonoBehaviour
         _visualSoundEffects.CreateBulletHoleDecal(hit);
     }
 
+    // get the entity it collided on
     private Entity ReturnEntityOnCollider(EntityColliderInfo c)
     {
+        // nullchcek
         if (c == null ||
             c.parentEntity == null ||
             !c.parentEntity.CompareTag("Enemy") )
@@ -118,6 +125,7 @@ public class WeaponObjectAttack : MonoBehaviour
         return c.parentEntity;
     }
 
+    // wait for _firerateTimer seconds then set state of weapon to idle
     IEnumerator FirerateTimerCoroutine()
     {
         // wait for _firerateTimer seconds and _firerateTimer as 0
@@ -128,11 +136,13 @@ public class WeaponObjectAttack : MonoBehaviour
         yield return null;
     }
 
+    // set bIsFiring to false when Attack1 input is let go
     public virtual void StopAttack1()
     {
         _bIsFiring = false;
     }
 
+    // start a coroutine on reloading
     public void Reload()
     {
         // Reload only if magazine is not full and can be reloaded
@@ -145,6 +155,7 @@ public class WeaponObjectAttack : MonoBehaviour
         }
     }
 
+    // make the weapon unusable for reloadTime seconds, and update the HUD to reflect reloading while its reloading
     IEnumerator ReloadCoroutine()
     {
         StartReload();
@@ -160,6 +171,7 @@ public class WeaponObjectAttack : MonoBehaviour
         yield return null;
     }
 
+    // set weapon state to reloading and play reload animation
     void StartReload()
     {
         _currentWeaponState = WeaponState.Reload;
@@ -167,6 +179,7 @@ public class WeaponObjectAttack : MonoBehaviour
         _visualSoundEffects.PlayWeaponAnimation(WeaponObjectAnimationManager.weaponAnimation.ReloadIn);
     }
 
+    // refill ammo and set state to idle so it can be uesd again
     void EndReload()
     {
         // Refill ammo

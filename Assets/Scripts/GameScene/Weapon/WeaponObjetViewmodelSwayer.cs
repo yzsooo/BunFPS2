@@ -48,21 +48,26 @@ public class WeaponObjectViewmodelSwayer : MonoBehaviour
         CompositeViewmodelSwaying();
     }
 
+    // get mouse vector from input
     public void UpdateMouseVector(Vector2 input)
     {
         _mouseInput = input;
     }
+
+    // get movement vector from input
     public void UpdateMovementVector(Vector2 input)
     {
         _movementInput = input;
     }
 
+    // rotate model based on mouse input
     private void CalculateMouseRotation()
     {
         Vector2 rot = _mouseInput * RotationAmount;
         _rotationVector = new Vector3(-rot.y, rot.x, 0.0f);
     }
 
+    // offset the position of model based on movement input
     private void CalculateMovementOffset()
     {
         float offsetX = _movementInput.x * OffsetAmount;
@@ -74,6 +79,7 @@ public class WeaponObjectViewmodelSwayer : MonoBehaviour
         _offsetVector.z += offsetY;
     }
 
+    // add a bobbing animation when theres a movement input
     private void CalculateMovementBobbing()
     {
         // applly bobbing when moving
@@ -92,6 +98,7 @@ public class WeaponObjectViewmodelSwayer : MonoBehaviour
         }
     }
 
+    // calculate and apply composite rotation and position of the viemodel
     private void CompositeViewmodelSwaying()
     {
         // Swaying the position of the viewmodel

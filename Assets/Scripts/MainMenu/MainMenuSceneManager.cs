@@ -11,6 +11,7 @@ public class MainMenuSceneManager : MonoBehaviour
 
     private void Awake()
     {
+        // set build name
         UIBuildText.text = "Build Name\n" + buildName;
     }
 }

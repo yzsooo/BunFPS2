@@ -29,6 +29,7 @@ public class PlayerManager : MonoBehaviour
 
     // should probably have a func that sets _pm to all the above classes
 
+    // turn on/off the player's movement, look and attack
     void EnablePlayerControl(bool bEnable)
     {
         bPlayerEnabled = bEnable;
@@ -38,6 +39,7 @@ public class PlayerManager : MonoBehaviour
         playerEntity.HP.enabled = bPlayerEnabled;
     }
 
+    // lock or unlock mouse cursor in game
     public void FlipMouseLock()
     {
         bLockMouse = !bLockMouse;

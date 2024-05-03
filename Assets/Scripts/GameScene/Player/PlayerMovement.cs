@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
         controller = GetComponent<CharacterController>();
     }
 
+    // get movement vector input
     public void InputMovementVector(Vector2 input)
     {
         _inputVector = input;
@@ -43,6 +44,8 @@ public class PlayerMovement : MonoBehaviour
     {
         Jump();
     }
+
+    // add vertical velocity if the player is grounded
     void Jump()
     {
         if (!_bGrounded) { return; }
@@ -57,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
         ProcessGravity();
     }
 
+    // calculate the actual speed of the player accounting for acceleration and deceleration
     void CalculateActualSpeed()
     {
         // accelerate if movement key is held
@@ -72,12 +76,13 @@ public class PlayerMovement : MonoBehaviour
         _actualSpeed = Mathf.Clamp(_actualSpeed, 0, speed);
     }
 
+    // use the character controller to move the player 
     void ProcessMovement()
     {
         Vector3 moveDircetion = GetGroundVelocity();
         controller.Move(transform.TransformDirection(moveDircetion) * _actualSpeed * Time.deltaTime);
     }
-
+    // return the velocity of the player on ground
     Vector3 GetGroundVelocity()
     {
         // update ground velocity if movement key is held
@@ -95,6 +100,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
+    // set the vertical velocity of the player by gravity
     void ProcessGravity()
     {
         // set downwards velocity so that the player is grounded

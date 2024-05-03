@@ -6,9 +6,10 @@ public class GiveWeapn_WeaponSubmenu : DebugUISubmenuButton
 {
     [SerializeField]
     WeaponObject _weaponToGive;
+
+    // Load the given weapon object to the player
     public override void UseButton()
     {
-        Debug.Log("Bingus");
         GameSceneManager.GameSceneManagerInstance.Player.attack.LoadWeapon(_weaponToGive);
     }
 }

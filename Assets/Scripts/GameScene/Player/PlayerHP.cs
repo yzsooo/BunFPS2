@@ -8,6 +8,8 @@ public class PlayerHP : EntityHP
     public PlayerManager pm;
     public float startHP;
     PlayerTakeDamageVisualEffects takeDamageVFX;
+    
+
     private void Awake()
     {
         currentHP = startHP;
@@ -15,6 +17,7 @@ public class PlayerHP : EntityHP
         takeDamageVFX = GetComponent<PlayerTakeDamageVisualEffects>();
     }
 
+    // deal damage to HP, update HUD and play visual effects of taking damage
     public override void TakeDamage(float damageAmount, Transform source = null)
     {
         base.TakeDamage(damageAmount, source);
@@ -22,6 +25,7 @@ public class PlayerHP : EntityHP
         takeDamageVFX.TakeDamageVisualEffects();
     }
 
+    // add HP and update hud
     public void HealDamage(float healAmount)
     {
         currentHP = Mathf.Clamp(currentHP + healAmount, 0, maxHP);

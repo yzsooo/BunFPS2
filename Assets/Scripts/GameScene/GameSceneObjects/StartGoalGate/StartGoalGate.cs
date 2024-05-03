@@ -6,6 +6,8 @@ using UnityEngine;
 public class StartGoalGate : MonoBehaviour
 {
     public StartGoalGateManager parent;
+
+    // gate can be either start gate or goal gate
     public enum GateType
     {
         Start,
@@ -14,7 +16,7 @@ public class StartGoalGate : MonoBehaviour
 
     public GateType thisGateType = GateType.Start;
 
-
+    // call GateManager's gate enter function
     private void OnTriggerEnter(Collider other)
     {
         parent.PlayerEnteredGate(thisGateType);

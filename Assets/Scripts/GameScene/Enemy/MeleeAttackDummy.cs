@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// test class used in the test scene, not an enemy entity
 public class MeleeAttackDummy : MonoBehaviour
 {
 
@@ -15,6 +16,7 @@ public class MeleeAttackDummy : MonoBehaviour
         StartCoroutine("SpawnCollider");
     }
 
+    // spawn a player-damaging collider every set time
     IEnumerator SpawnCollider()
     {
         yield return new WaitForSeconds(spawnInterval);

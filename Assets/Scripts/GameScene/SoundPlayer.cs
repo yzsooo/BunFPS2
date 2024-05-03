@@ -13,17 +13,14 @@ public class SoundPlayer : MonoBehaviour
         SetSoundPlayerInstance();
     }
 
+    // Set soundplayer Singleton
     void SetSoundPlayerInstance()
     {
-        // check if SPI already exists and do nothing if it is
-        if (SoundPlayerInstance != null)
-        {
-            return;
-        }
-        // set SPI as this object
+        if (SoundPlayerInstance) { return; }
         SoundPlayerInstance = this;
     }
 
+    // Create a new gameobject at a set location and play a sound
     public void PlaySound(AudioClip audioClip, Vector3 position, float volume)
     {
         // Create a empty gameobject with audiosource and soundplayerobject

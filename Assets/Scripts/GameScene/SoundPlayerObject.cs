@@ -21,12 +21,16 @@ public class SoundPlayerObject : MonoBehaviour
         }
     }
 
+    // Called from SoundPlayer
+    // move this object to the set location and play the given audioclip
     public void PlaySound(AudioClip ac, Vector3 position, float volume)
     {
-        audiosource.volume = volume;
-        bActivated = true;
         transform.position = position;
+
         audiosource.clip = ac;
+        audiosource.volume = volume;
+
+        bActivated = true;
 
         audiosource.Play();
     }

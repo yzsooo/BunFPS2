@@ -22,19 +22,19 @@ public class WeaponObject : MonoBehaviour
         AssignWeaponObjectComponents();
     }
 
+    // assign variables and attach self to script variables
     void AssignWeaponObjectComponents()
     {
-        // assign variables
         weaponAnimation = GetComponent<WeaponObjectAnimationManager>();
         attack = GetComponent<WeaponObjectAttack>();
         ViewmodelCamera = GetComponent<Camera>();
         ViewmodelSwayer = GetComponent<WeaponObjectViewmodelSwayer>();
 
-        // assign self to each script variables
         weaponAnimation.weapon = this;
         attack.weapon = this;
     }
 
+    // check if weapon is loaded by checking variables it needs to function
     public bool IsWeaponLoaded()
     {
         if (!cam || !playerAttack || !weaponStats || !ViewmodelCamera)
@@ -43,17 +43,21 @@ public class WeaponObject : MonoBehaviour
         }
         return true;
     }
+
+    // run the attack function in this weapon's attack class and return if its a valid attack
     public bool StartAttack1()
     {
         bool attackIsValid = attack.StartAttack1();
         return attackIsValid;
     }
 
+    // run the stop attack function in the weapon's attack class
     public void StopAttack1()
     {
         attack.StopAttack1();
     }
 
+    // run the reload function in the weapon's attack class
     public void Reload()
     {
         attack.Reload();

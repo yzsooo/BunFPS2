@@ -11,6 +11,7 @@ public class PlayerTakeDamageVisualEffects : MonoBehaviour
     [Header("Full screen flash")]
     public Animator animation;
 
+    // add recoil to the camera and play the animation when taking damage
     public void TakeDamageVisualEffects()
     {
         pm.look.CameraRecoil.AddRecoil(Vector3.left * onDamageRecoilAngle, onDamageRecoilDuration, onDamageRecoilDuration, onDamageRecoilAngle);

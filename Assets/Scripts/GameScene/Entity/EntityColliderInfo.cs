@@ -7,6 +7,7 @@ public class EntityColliderInfo : MonoBehaviour
     public Entity parentEntity;
     Collider thisCollider;
 
+    // set collider of this colliderInfo
     private void Awake()
     {
         thisCollider = transform.GetComponent<Collider>();
