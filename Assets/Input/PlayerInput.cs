@@ -153,7 +153,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""8466e2fb-c87a-4427-8ed1-b0aa7bf96595"",
-                    ""path"": ""<Keyboard>/escape"",
+                    ""path"": ""<Keyboard>/m"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -210,6 +210,34 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""GameControl"",
+            ""id"": ""41470cc0-4092-4680-a3ba-1aad4f2c0690"",
+            ""actions"": [
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""37e8a193-1907-4934-ac3c-72265342a7ff"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""9b8c4e5a-9ea6-45e9-a2a6-bfcf0ead5585"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -226,6 +254,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Attack = asset.FindActionMap("Attack", throwIfNotFound: true);
         m_Attack_Attack1 = m_Attack.FindAction("Attack1", throwIfNotFound: true);
         m_Attack_Reload = m_Attack.FindAction("Reload", throwIfNotFound: true);
+        // GameControl
+        m_GameControl = asset.FindActionMap("GameControl", throwIfNotFound: true);
+        m_GameControl_Escape = m_GameControl.FindAction("Escape", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -445,6 +476,52 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         }
     }
     public AttackActions @Attack => new AttackActions(this);
+
+    // GameControl
+    private readonly InputActionMap m_GameControl;
+    private List<IGameControlActions> m_GameControlActionsCallbackInterfaces = new List<IGameControlActions>();
+    private readonly InputAction m_GameControl_Escape;
+    public struct GameControlActions
+    {
+        private @PlayerInput m_Wrapper;
+        public GameControlActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Escape => m_Wrapper.m_GameControl_Escape;
+        public InputActionMap Get() { return m_Wrapper.m_GameControl; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GameControlActions set) { return set.Get(); }
+        public void AddCallbacks(IGameControlActions instance)
+        {
+            if (instance == null || m_Wrapper.m_GameControlActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_GameControlActionsCallbackInterfaces.Add(instance);
+            @Escape.started += instance.OnEscape;
+            @Escape.performed += instance.OnEscape;
+            @Escape.canceled += instance.OnEscape;
+        }
+
+        private void UnregisterCallbacks(IGameControlActions instance)
+        {
+            @Escape.started -= instance.OnEscape;
+            @Escape.performed -= instance.OnEscape;
+            @Escape.canceled -= instance.OnEscape;
+        }
+
+        public void RemoveCallbacks(IGameControlActions instance)
+        {
+            if (m_Wrapper.m_GameControlActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IGameControlActions instance)
+        {
+            foreach (var item in m_Wrapper.m_GameControlActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_GameControlActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public GameControlActions @GameControl => new GameControlActions(this);
     public interface IMoveActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -459,5 +536,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     {
         void OnAttack1(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
+    }
+    public interface IGameControlActions
+    {
+        void OnEscape(InputAction.CallbackContext context);
     }
 }

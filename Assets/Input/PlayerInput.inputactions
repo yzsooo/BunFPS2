@@ -131,7 +131,7 @@
                 {
                     "name": "",
                     "id": "8466e2fb-c87a-4427-8ed1-b0aa7bf96595",
-                    "path": "<Keyboard>/escape",
+                    "path": "<Keyboard>/m",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -184,6 +184,34 @@
                     "processors": "",
                     "groups": "",
                     "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "GameControl",
+            "id": "41470cc0-4092-4680-a3ba-1aad4f2c0690",
+            "actions": [
+                {
+                    "name": "Escape",
+                    "type": "Button",
+                    "id": "37e8a193-1907-4934-ac3c-72265342a7ff",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9b8c4e5a-9ea6-45e9-a2a6-bfcf0ead5585",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Escape",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
