@@ -10,6 +10,7 @@ public class WeaponContainerUI : SelectionContainerUI
     public override void SetContainerUI()
     {
         selectionName.text = weaponInfo.weaponName;
+        selectionIcon.sprite = weaponInfo.weaponIcon;
     }
 
     // set this weapon as the selected weapon

@@ -8,72 +8,75 @@ public class StageSelectUI : MonoBehaviour
 {
     // Weapon
     [Header("Weapon")]
-    public RectTransform weaponPanel;
+    public RectTransform weaponSelection;
+    public CurrentSelectionUI currentWeaponSelection;
 
     // Stage
     [Header("Stage")]
-    public RectTransform stagePanel;
+    public RectTransform stageSelection;
+    public CurrentSelectionUI currentStageSelection;
 
-    // Selected stuff
-    [Header("Selected Weapon and Stage")]
-    public TextMeshProUGUI selectedWeaponText;
-    public TextMeshProUGUI selectedStageText;
+    [Header("")]
+    public CurrentSelectionDescriptionUI selectionDescription;
+
+    // Currently selected stuff
     WeaponScriptableObject _currentWeapon;
-    LevelInfoScriptableObject _currentStage;
+    LevelInfoScriptableObject _currentLevel;
 
     private void Awake()
     {
-        SetupWeaponAndStageSelection();
-        SetupSelectedUIText();
+        SetupWeaponStageSelection();
     }
 
-    // set parent of weapon and stage container ui to this
-    void SetupWeaponAndStageSelection()
+    // Set parent variable of each container in weapon and level selection menu
+    void SetupWeaponStageSelection()
     {
-        List<RectTransform> panels = new List<RectTransform> { weaponPanel, stagePanel };
+        List<RectTransform> panels = new List<RectTransform> { weaponSelection, stageSelection };
         foreach (RectTransform panel in panels)
         {
             foreach (RectTransform container in panel)
             {
-                SelectionContainerUI selectionContainer = container.GetComponent<SelectionContainerUI>();
-                selectionContainer.parent = this;
+                container.GetComponent<SelectionContainerUI>().parent = this;
             }
         }
     }
 
-    // set selected weapon and stage text as blanks
-    void SetupSelectedUIText()
-    {
-        selectedWeaponText.text = "";
-        selectedStageText.text = "";
-    }
-
-    // update current selected weapon and text on ui
+    // update the currently selected weapon and update the UI description alongisde it
     public void SelectWeapon(WeaponScriptableObject weapon)
     {
         _currentWeapon = weapon;
-        selectedWeaponText.text = _currentWeapon.weaponName;
+        currentWeaponSelection.UpdateCurrentSelection(_currentWeapon.name, _currentWeapon.weaponIcon);
+        currentWeaponSelection.ToggleSelection(false);
+        selectionDescription.UpdateWeaponDesc(weapon);
     }
 
-    // update current selected stage and text on ui
+    // update the currently selected stage and update the UI description alongisde it
     public void SelectStage(LevelInfoScriptableObject level)
     {
-        _currentStage = level;
-        selectedStageText.text = _currentStage.LevelName;
+        _currentLevel = level;
+        currentStageSelection.UpdateCurrentSelection(_currentLevel.name, _currentLevel.LevelIcon);
+        currentStageSelection.ToggleSelection(false);
+        selectionDescription.UpdateLevelDesc(level);
     }
 
     // check if both weapon and stage is set
     // save into PlayerOptions and load into the selected stage
     public void ConfirmStageSelect()
     {
-        if (_currentStage == null || _currentWeapon == null)
+        if (_currentLevel == null || _currentWeapon == null)
         {
             Debug.Log("Stage or weapon not selected");
             return;
         }
         // save selected weapons to PlayerOptions
-        PlayerOptionsManager.PlayerOptionsInstance.SaveStageSelectOptions(_currentWeapon, _currentStage);
+        PlayerOptionsManager.PlayerOptionsInstance.SaveStageSelectOptions(_currentWeapon, _currentLevel);
         // load selected stage
-        SceneLoader.SceneLoaderInstance.ChangeSceneTo(_currentStage.SceneName);
+        SceneLoader.SceneLoaderInstance.ChangeSceneTo(_currentLevel.SceneName);
+    }
+
+    // load back to the main scene
+    public void ReturnToMainScene()
+    {
+        SceneLoader.SceneLoaderInstance.ChangeSceneTo("MainMenuScene");
     }
 }

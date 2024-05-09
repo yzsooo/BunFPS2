@@ -8,6 +8,8 @@ using UnityEngine;
 public class WeaponScriptableObject : ScriptableObject
 {
     public string weaponName;
+    public Sprite weaponIcon;
+    public string weaponDescription;
     public WeaponObject weaponPrefab;
     [Header("Stats")]
     public int roundsPerMagazine;

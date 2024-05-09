@@ -12,7 +12,7 @@ public class Entity : MonoBehaviour
     public virtual void Awake()
     {
         // Set HP var and HP's parententity
-        HP = GetComponent<EntityHP>();
+        if (!HP) { HP = GetComponent<EntityHP>(); }
         HP.ParentEntity = this;
         // set each EntityColliderInfo's parentEntity
         foreach (Transform t in Mesh)

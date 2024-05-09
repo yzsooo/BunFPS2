@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New LevelInfo", menuName = "LevelInfo Scriptable Object")]
 public class LevelInfoScriptableObject : ScriptableObject
 {
     public string LevelName;
+    public Sprite LevelIcon;
     public string SceneName;
 
     [Header("Scoring")]
