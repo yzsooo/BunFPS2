@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: TestLevel
   m_EditorClassIdentifier: 
   LevelName: TestLevel
+  LevelIcon: {fileID: 21300000, guid: e73f749fff4111642ae3e5692dddb904, type: 3}
   SceneName: SampleScene
   PentaltyPerMissedEnemy: 1
   ScoreTarget_RankS: 10

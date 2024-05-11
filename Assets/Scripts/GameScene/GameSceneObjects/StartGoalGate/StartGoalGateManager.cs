@@ -13,6 +13,8 @@ public class StartGoalGateManager : MonoBehaviour
     public Transform enemyCollection;
     int _enemyCount = 0;
 
+    public GameoverUI gameoverUI;
+
     private void Awake()
     {
         SetStartGoalGates();
@@ -21,7 +23,7 @@ public class StartGoalGateManager : MonoBehaviour
     }
 
     // count how many enemies are in enemyCollection
-    int CountEnemy()
+    public int CountEnemy()
     {
         int count = 0;
         foreach (Transform t in enemyCollection)
@@ -77,7 +79,10 @@ public class StartGoalGateManager : MonoBehaviour
             levelTimer.timerActive = false;
             SetEnemyCollectionActive(false);
             Debug.Log("Remaining enemies; " + CountEnemy().ToString());
+            // update the time, remaining enemies and rank
             GameSceneManager.GameSceneManagerInstance.ScoreCalculation.CalculateScore(levelTimer.currentTime, CountEnemy());
+            // call gameoverui's win function, if the player reached the goal without dying itll count as a win
+            GameSceneManager.GameSceneManagerInstance.GameoverManager.gameoverUI.EnableGameoverUI(true);
         }
     }
 

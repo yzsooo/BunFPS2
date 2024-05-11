@@ -10,6 +10,7 @@ public class StageContainerUI : SelectionContainerUI
     public override void SetContainerUI()
     {
         selectionName.text = levelInfo.LevelName;
+        selectionIcon.sprite = levelInfo.LevelIcon;
     }
 
     // set the selected stage to this level

@@ -32,7 +32,6 @@ public class PauseMenu : MonoBehaviour
             // so the arg to pass is reverse of bGamePaused
             GameSceneManager.GameSceneManagerInstance.Player.FlipMouseLock(false, !bGamePaused);
         }
-        
     }
 
     // return to main scene
