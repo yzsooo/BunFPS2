@@ -40,9 +40,17 @@ public class PlayerManager : MonoBehaviour
     }
 
     // lock or unlock mouse cursor in game
-    public void FlipMouseLock()
+    public void FlipMouseLock(bool bFlip = true, bool bLock = false)
     {
-        bLockMouse = !bLockMouse;
+        // if flip is on just reverse bLockMouse, otherwise set bLockMouse to bLock
+        if (bFlip)
+        {
+            bLockMouse = !bLockMouse;
+        }
+        else
+        {
+            bLockMouse = bLock;
+        }
         switch (bLockMouse)
         {
             case true:
