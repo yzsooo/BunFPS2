@@ -6,9 +6,6 @@ using UnityEngine.UI;
 
 public class MainMenuUI : MonoBehaviour
 {
-
-    public SceneAsset stageSelectScene;
-
     [Header("Menu Selcetion Image")]
     public Image SelectionImage;
     public Sprite StartSelectionIcon;
@@ -16,7 +13,7 @@ public class MainMenuUI : MonoBehaviour
     // call the scene loader and change to the stage select scene
     public void StageSelect()
     {
-        SceneLoader.SceneLoaderInstance.ChangeSceneTo(stageSelectScene.name);
+        SceneLoader.SceneLoaderInstance.ChangeSceneTo("StageSelectScene");
     }
 
     // quit the game 

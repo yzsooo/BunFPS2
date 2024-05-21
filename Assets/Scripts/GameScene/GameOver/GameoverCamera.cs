@@ -7,6 +7,11 @@ public class GameoverCamera : MonoBehaviour
     public Transform cameraAnchor;
     public float cameraTurnSpeed;
 
+    private void Awake()
+    {
+        this.gameObject.SetActive(false);
+    }
+
     private void Update()
     {
         // rotate around the player's position overtime
