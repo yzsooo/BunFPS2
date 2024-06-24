@@ -48,6 +48,7 @@ public class StageSelectUI : MonoBehaviour
         currentWeaponSelection.UpdateCurrentSelection(_currentWeapon.name, _currentWeapon.weaponIcon);
         currentWeaponSelection.ToggleSelection(false);
         selectionDescription.UpdateWeaponDesc(weapon);
+        Debug.Log(_currentWeapon.weaponName);
     }
 
     // update the currently selected stage and update the UI description alongisde it
@@ -69,6 +70,7 @@ public class StageSelectUI : MonoBehaviour
             return;
         }
         // save selected weapons to PlayerOptions
+        Debug.Log(_currentWeapon);
         PlayerOptionsManager.PlayerOptionsInstance.SaveStageSelectOptions(_currentWeapon, _currentLevel);
         // load selected stage
         SceneLoader.SceneLoaderInstance.ChangeSceneTo(_currentLevel.SceneName);

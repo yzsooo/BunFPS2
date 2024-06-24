@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e084f7ba7d5e754d93c3ca37566aff4, type: 3}
+  m_Name: ImprovedPistol
+  m_EditorClassIdentifier: 
+  weaponName: Improved Pistol
+  weaponIcon: {fileID: 21300000, guid: 2c1696813071e4f4189ce87a22f5ed87, type: 3}
+  weaponDescription: Good damage, Good firerate and manageable recoil
+  weaponPrefab: {fileID: 8111389077132608587, guid: 93649e5179557be479a73f792dba5f88, type: 3}
+  roundsPerMagazine: 21
+  roundsPerMinute: 550
+  damage: 18
+  reloadTime: 1
+  RecoilAnglePerShot: 40
+  RecoilMaxAngle: 20
+  RecoilTimePerShot: 0.1
+  SpreadMaxAngle: 0.3
+  SpreadShotsToMaxAngle: 15
+  SpreadRecoverTime: 1
+  FireSound: {fileID: 8300000, guid: 45bc167699c721b43841a40d4e338515, type: 3}
+  ReloadSound: {fileID: 8300000, guid: 161ebce85baf70b42bb7ea212befbe57, type: 3}

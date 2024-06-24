@@ -35,6 +35,7 @@ public class GameSceneManager : MonoBehaviour
     public void LoadPlayerOptions()
     {
         Debug.Log("Load player options");
+        Debug.Log(PlayerOptionsManager.PlayerOptionsInstance.selectedWeapon.weaponName);
         if (!PlayerOptionsManager.PlayerOptionsInstance) { return; }
         Player.attack.LoadWeapon(PlayerOptionsManager.PlayerOptionsInstance.selectedWeapon.weaponPrefab);
     }

@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/LoadingScene.unity
     guid: fb6edfb5852e38645a7a69f5d8aa4afa
+  - enabled: 1
+    path: Assets/Scenes/KillhouseLevel.unity
+    guid: 9ea6e49eae3d7a6419f551f8bb39058f
   m_configObjects: {}

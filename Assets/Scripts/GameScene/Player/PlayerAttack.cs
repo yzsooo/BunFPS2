@@ -25,6 +25,7 @@ public class PlayerAttack : MonoBehaviour
     public void LoadWeapon(WeaponObject newWeaponObject)
     {
         RemoveLoadedWeapon();
+        Debug.Log(newWeaponObject.weaponStats.weaponName);
         // instantiate new weapon as the child of this object
         currentWeapon = Instantiate(newWeaponObject);
         currentWeapon.transform.parent = this.transform;
